@@ -10,7 +10,7 @@ import { useContext } from "react";
 import AppContext from "../../../context/AppContext";
 
 const NavbarleftSection = () => {
-  const { navSelect } = useContext(AppContext);
+  const { navSelect, setNavSelect } = useContext(AppContext);
 
   return (
     <LeftSection>
@@ -22,16 +22,32 @@ const NavbarleftSection = () => {
       </AreaTitleImg>
       <ListNavegation>
         <ul>
-          <StyledLi navSelect={navSelect} id="home">
+          <StyledLi
+            navSelect={navSelect}
+            id="home"
+            onClick={() => setNavSelect("home")}
+          >
             Home
           </StyledLi>
-          <StyledLi navSelect={navSelect} id="filmes">
+          <StyledLi
+            navSelect={navSelect}
+            id="filmes"
+            onClick={() => setNavSelect("filmes")}
+          >
             Filmes
           </StyledLi>
-          <StyledLi navSelect={navSelect} id="series">
+          <StyledLi
+            navSelect={navSelect}
+            id="series"
+            onClick={() => setNavSelect("series")}
+          >
             Séries
           </StyledLi>
-          <StyledLi navSelect={navSelect} id="favoritos">
+          <StyledLi
+            navSelect={navSelect}
+            id="favoritos"
+            onClick={() => setNavSelect("favoritos")}
+          >
             Favoritos
           </StyledLi>
         </ul>

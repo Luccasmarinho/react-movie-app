@@ -2,6 +2,10 @@ import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
+interface StyledButtonProps {
+  isClicked: boolean;
+}
+
 export const RightSection = styled.div`
   display: flex;
   align-items: center;
@@ -17,6 +21,12 @@ export const RightSection = styled.div`
     outline: none;
     cursor: pointer;
   }
+`;
+
+export const StyledButtonSearch = styled.button.withConfig({
+  shouldForwardProp: (prop) => prop !== "isClicked",
+})<StyledButtonProps>`
+  visibility: ${({ isClicked }) => (isClicked ? "hidden" : "visible")};
 `;
 
 export const StyledSearchIcon = styled(SearchIcon)`

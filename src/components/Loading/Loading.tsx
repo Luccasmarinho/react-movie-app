@@ -6,10 +6,10 @@ export default function Loading() {
     <Box
       sx={{
         display: "flex",
-        position: "absolute", // Ou fixed, dependendo da sua necessidade
+        position: "absolute",
         top: "50%",
         left: "50%",
-        zIndex: 9999, // Garantir que o Loading fique acima de outros elementos
+        zIndex: 9999999, 
       }}
     >
       <CircularProgress />

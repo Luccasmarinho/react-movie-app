@@ -27,8 +27,8 @@ const SwiperCarousel = () => {
   }
 
   useEffect(() => {
+    setLoading(true);
     async function reqGet() {
-      setLoading(true);
       try {
         const response = await api.get<MoviesResponse>("/movie/popular");
         setMovieUpComing(response.data.results);
@@ -70,7 +70,7 @@ const SwiperCarousel = () => {
             </Container>
             <img
               src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-              alt=""
+              alt="Poster filme"
             />
           </SwiperSlide>
         ))

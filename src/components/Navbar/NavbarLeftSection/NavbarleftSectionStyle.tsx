@@ -50,7 +50,9 @@ export const ListNavegation = styled.nav`
   }
 `;
 
-export const StyledLi = styled.li<StyledLiProps>`
+export const StyledLi = styled.li.withConfig({
+  shouldForwardProp: (prop) => prop !== "navSelect",
+})<StyledLiProps>`
   background-color: ${({ navSelect, id }) =>
     navSelect == id ? "var(--color-main-red)" : "transparent"};
 `;

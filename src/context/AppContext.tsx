@@ -7,6 +7,8 @@ interface AppContextType {
   setNavSelect: React.Dispatch<React.SetStateAction<string>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  isClicked: boolean;
+  setIsClicked: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 interface Movie {

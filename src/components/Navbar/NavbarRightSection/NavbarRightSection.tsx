@@ -6,15 +6,23 @@ import {
   RightSection,
   StyledSearchIcon,
   StyledArrowDown,
+  StyledButtonSearch,
 } from "./NavbarRightSectionStyle";
+import InputSearch from "../../InputSearch/InputSearch";
+import { useContext } from "react";
+import AppContext from "../../../context/AppContext";
 
 const NavbarRightSection = () => {
+  const { isClicked, setIsClicked } = useContext(AppContext);
   return (
     <RightSection>
-      <button>
+      <StyledButtonSearch
+        onClick={() => setIsClicked(true)}
+        isClicked={isClicked}
+      >
         <StyledSearchIcon />
-        {/* <input type="text" style={{ width: "300px" }} /> */}
-      </button>
+      </StyledButtonSearch>
+      {isClicked && <InputSearch />}
       <button>
         <NotificationBadge />
       </button>
