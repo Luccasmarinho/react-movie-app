@@ -1,8 +1,17 @@
 // import React from "react";
-import { LeftSection, AreaTitleImg, ListNavegation } from "./NavbarleftSectionStyle";
-import image from "../../../assets/popcorn.webp"
+import {
+  LeftSection,
+  AreaTitleImg,
+  ListNavegation,
+  StyledLi,
+} from "./NavbarleftSectionStyle";
+import image from "../../../assets/popcorn.webp";
+import { useContext } from "react";
+import AppContext from "../../../context/AppContext";
 
 const NavbarleftSection = () => {
+  const { navSelect } = useContext(AppContext);
+
   return (
     <LeftSection>
       <AreaTitleImg>
@@ -13,10 +22,18 @@ const NavbarleftSection = () => {
       </AreaTitleImg>
       <ListNavegation>
         <ul>
-          <li>Home</li>
-          <li>Filmes</li>
-          <li>Séries</li>
-          <li>Favoritos</li>
+          <StyledLi navSelect={navSelect} id="home">
+            Home
+          </StyledLi>
+          <StyledLi navSelect={navSelect} id="filmes">
+            Filmes
+          </StyledLi>
+          <StyledLi navSelect={navSelect} id="series">
+            Séries
+          </StyledLi>
+          <StyledLi navSelect={navSelect} id="favoritos">
+            Favoritos
+          </StyledLi>
         </ul>
       </ListNavegation>
     </LeftSection>

@@ -1,12 +1,45 @@
 import { SwiperSlide } from "swiper/react";
 import "swiper/css"; // Importando o estilo base
 import "swiper/css/navigation"; // Se quiser navegação (setinhas)
-import image from "../../assets/teste-img.jpg";
-import { StyledSwiper } from "./SwiperCarouselStyle";
+import { StyledSwiper, Container, AreaButton } from "./SwiperCarouselStyle";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
 
 import { Navigation, Autoplay } from "swiper/modules"; // Importar o módulo de navegação (se quiser setas)
+import { useContext, useEffect } from "react";
+import { api } from "../../service/api";
+import AppContext from "../../context/AppContext";
+import Loading from "../Loading/Loading";
 
 const SwiperCarousel = () => {
+  const { movieUpComing, setMovieUpComing, loading, setLoading } =
+    useContext(AppContext);
+
+  interface Movie {
+    id: number;
+    backdrop_path: string;
+    overview: string;
+    title: string;
+  }
+
+  interface MoviesResponse {
+    results: Movie[];
+  }
+
+  useEffect(() => {
+    async function reqGet() {
+      setLoading(true);
+      try {
+        const response = await api.get<MoviesResponse>("/movie/popular");
+        setMovieUpComing(response.data.results);
+        setLoading(false);
+      } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+      }
+    }
+    reqGet();
+  }, []);
+
   return (
     <StyledSwiper
       modules={[Navigation, Autoplay]} // Se quiser usar setas ou outros módulos
@@ -14,20 +47,34 @@ const SwiperCarousel = () => {
       spaceBetween={0} // Espaço entre slides
       slidesPerView={1} // Quantos slides aparecem de uma vez
       autoplay={{ delay: 5000 }}
-      loop={true}
+      loop={false}
     >
-      <SwiperSlide>
-        <img src={image} alt="" />
-      </SwiperSlide>
-      <SwiperSlide>
-        <img src={image} alt="" />
-      </SwiperSlide>
-      <SwiperSlide>
-        <img src={image} alt="" />
-      </SwiperSlide>
-      <SwiperSlide>
-        <img src={image} alt="" />
-      </SwiperSlide>
+      {loading ? (
+        <Loading />
+      ) : (
+        movieUpComing.map((movie) => (
+          <SwiperSlide key={movie.id}>
+            <Container>
+              <h1>{movie.title}</h1>
+              <p>{movie.overview}</p>
+              <AreaButton>
+                <button>
+                  <PlayArrowIcon />
+                  Assistir
+                </button>
+                <button>
+                  <InfoOutlineIcon />
+                  Mais informações
+                </button>
+              </AreaButton>
+            </Container>
+            <img
+              src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+              alt=""
+            />
+          </SwiperSlide>
+        ))
+      )}
     </StyledSwiper>
   );
 };

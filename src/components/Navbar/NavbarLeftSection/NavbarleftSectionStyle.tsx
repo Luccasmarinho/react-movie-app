@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export interface StyledLiProps {
+  navSelect: string;
+}
+
 export const LeftSection = styled.div`
   display: flex;
   align-items: center;
@@ -44,4 +48,9 @@ export const ListNavegation = styled.nav`
   li:hover {
     background-color: var(--color-main-red);
   }
+`;
+
+export const StyledLi = styled.li<StyledLiProps>`
+  background-color: ${({ navSelect, id }) =>
+    navSelect == id ? "var(--color-main-red)" : "transparent"};
 `;

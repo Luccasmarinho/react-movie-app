@@ -2,8 +2,11 @@ import styled from "styled-components";
 
 export const HeaderNav = styled.header`
   width: 100%;
-  background: linear-gradient(to right, black 40%, var(--color-main-red));
+  /* background: linear-gradient(to right, black 40%, var(--color-main-red)); */
+  background-color: transparent;
   color: white;
+  position: fixed;
+  z-index: 1000000;
 `;
 
 export const Container = styled.div`
@@ -11,4 +14,3 @@ export const Container = styled.div`
   justify-content: space-between;
   margin: 0 20px;
 `;
-
