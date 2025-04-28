@@ -40,7 +40,7 @@ export const ListNavegation = styled.nav`
     border-radius: 5px;
     transition: all.4s;
   }
-  
+
   li:hover {
     background-color: var(--color-main-red);
   }
