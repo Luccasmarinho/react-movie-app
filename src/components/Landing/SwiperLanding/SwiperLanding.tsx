@@ -1,15 +1,14 @@
 import { SwiperSlide } from "swiper/react";
 import "swiper/css"; // Importando o estilo base
 import "swiper/css/navigation"; // Se quiser navegação (setinhas)
-import { StyledSwiper, Container, AreaButton } from "./SwiperCarouselStyle";
+import { Navigation, Autoplay } from "swiper/modules"; // Importar o módulo de navegação (se quiser setas)
+import { StyledSwiper, Container, AreaButton } from "./SwiperLandingStyle";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
-
-import { Navigation, Autoplay } from "swiper/modules"; // Importar o módulo de navegação (se quiser setas)
 import { useContext, useEffect } from "react";
-import { api } from "../../service/api";
-import AppContext from "../../context/AppContext";
-import Loading from "../Loading/Loading";
+import { api } from "../../../service/api";
+import AppContext from "../../../context/AppContext";
+import Loading from "../../Loading/Loading";
 
 const SwiperCarousel = () => {
   const { movieUpComing, setMovieUpComing, loading, setLoading } =
@@ -30,7 +29,7 @@ const SwiperCarousel = () => {
     setLoading(true);
     async function reqGet() {
       try {
-        const response = await api.get<MoviesResponse>("/movie/popular");
+        const response = await api.get<MoviesResponse>("/movie/top_rated");
         setMovieUpComing(response.data.results);
         setLoading(false);
       } catch (error) {

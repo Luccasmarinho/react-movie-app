@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const StyledWrapper = styled.div`
-  /* this is a recreation of twitter search in css */
   .form {
     --input-text-color: #fff;
     --input-bg-color: #283542;
@@ -22,7 +21,6 @@ export const StyledWrapper = styled.div`
     position: relative;
     isolation: isolate;
   }
-  /* a fancy bg for showing background and border when focus. */
   .fancy-bg {
     position: absolute;
     width: 100%;
@@ -35,7 +33,6 @@ export const StyledWrapper = styled.div`
     pointer-events: none;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   }
-  /* label styling */
   label {
     width: 100%;
     padding: 0.8em;
@@ -49,18 +46,15 @@ export const StyledWrapper = styled.div`
   .close-btn {
     position: absolute;
   }
-  /* styling search-icon */
   .search {
     fill: var(--text-color);
     left: var(--inline-padding-of-input);
   }
-  /* svg -- size */
   svg {
     width: 17px;
     display: block;
     color: white;
   }
-  /* styling of close button */
   .close-btn {
     border: none;
     right: var(--inline-padding-of-input);
@@ -77,7 +71,6 @@ export const StyledWrapper = styled.div`
     opacity: 0;
     visibility: hidden;
   }
-  /* styling of input */
   .input {
     color: var(--input-text-color);
     width: 100%;
@@ -94,21 +87,17 @@ export const StyledWrapper = styled.div`
   .input::placeholder {
     color: var(--text-color);
   }
-  /* input background change in focus */
   .input:focus ~ .fancy-bg {
     border: 1px solid white;
     background: var(--focus-input-bg-color);
   }
-  /* search icon color change in focus */
   .input:focus ~ .search {
     fill: white;
   }
-  /* showing close button when typing */
   .input:valid ~ .close-btn {
     opacity: 1;
     visibility: visible;
   }
-  /* this is for the default background in input,when selecting autofill options -- you can remove this code if you do not want to override the browser style.  */
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,

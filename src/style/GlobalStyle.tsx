@@ -19,5 +19,6 @@ export const GlobalStyle = createGlobalStyle`
 
     body {
         min-height: 100vh;
+        background: linear-gradient(to bottom, var(--color-background-gradient))
     }
 `;

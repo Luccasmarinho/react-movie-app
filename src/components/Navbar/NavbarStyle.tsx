@@ -1,8 +1,17 @@
 import styled from "styled-components";
 
-export const HeaderNav = styled.header`
+interface scrollMoveProps {
+  scrollMove: boolean;
+}
+
+export const HeaderNav = styled.header.withConfig({
+  shouldForwardProp: (prop) => prop !== "scrollMove",
+})<scrollMoveProps>`
   width: 100%;
-  /* background: linear-gradient(to right, black 40%, var(--color-main-red)); */
+  background: ${({ scrollMove }) =>
+    scrollMove
+      ? "linear-gradient(to right, black 40%, var(--color-main-red))"
+      : "transparent"};
   background-color: transparent;
   color: white;
   position: fixed;
