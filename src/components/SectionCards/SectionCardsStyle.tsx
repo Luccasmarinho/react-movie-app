@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.section`
   /* height: 400px; */
   width: 100%;
-  background: linear-gradient(to bottom, var(--color-background-gradient));
+  /* background: linear-gradient(to bottom, var(--color-background-gradient)); */
 `;
 
 export const Box = styled.div`

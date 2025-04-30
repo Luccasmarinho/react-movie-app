@@ -25,6 +25,9 @@ interface AppContextType {
   setIsClicked: React.Dispatch<React.SetStateAction<boolean>>
   moviePopular: MoviePopular[];
   setMoviePopular: React.Dispatch<React.SetStateAction<MoviePopular[]>>
+  movieUpComing: MoviePopular[];
+  setMovieUpComing: React.Dispatch<React.SetStateAction<MoviePopular[]>>
+
 }
 
 

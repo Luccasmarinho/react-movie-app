@@ -16,12 +16,13 @@ interface MoviePopular {
 }
 
 interface PropsChildren {
-  children: ReactNode
+  children: ReactNode;
 }
 
 function AppProvider({ children }: PropsChildren) {
   const [movieTopRated, setMovieTopRated] = useState<MovieTopRated[]>([]);
   const [moviePopular, setMoviePopular] = useState<MoviePopular[]>([]);
+  const [movieUpComing, setMovieUpComing] = useState<MoviePopular[]>([]);
   const [navSelect, setNavSelect] = useState<string>("home");
   const [loading, setLoading] = useState<boolean>(false);
   const [isClicked, setIsClicked] = useState<boolean>(false);
@@ -36,14 +37,12 @@ function AppProvider({ children }: PropsChildren) {
     isClicked,
     setIsClicked,
     moviePopular,
-    setMoviePopular
+    setMoviePopular,
+    movieUpComing,
+    setMovieUpComing
   };
 
-  return (
-    <AppContext.Provider value={values}>
-      {children}
-    </AppContext.Provider>
-  )
+  return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 }
 
 export default AppProvider;
