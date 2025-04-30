@@ -1,11 +1,18 @@
 import { ReactNode, useState } from "react";
 import AppContext from "./AppContext";
 
-interface Movie {
+interface MovieTopRated {
   id: number;
   backdrop_path: string;
   overview: string;
   title: string;
+}
+
+interface MoviePopular {
+  id: number;
+  title: string;
+  vote_average: number;
+  poster_path: string;
 }
 
 interface PropsChildren {
@@ -13,20 +20,23 @@ interface PropsChildren {
 }
 
 function AppProvider({ children }: PropsChildren) {
-  const [movieUpComing, setMovieUpComing] = useState<Movie[]>([]);
+  const [movieTopRated, setMovieTopRated] = useState<MovieTopRated[]>([]);
+  const [moviePopular, setMoviePopular] = useState<MoviePopular[]>([]);
   const [navSelect, setNavSelect] = useState<string>("home");
   const [loading, setLoading] = useState<boolean>(false);
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
   const values = {
-    movieUpComing,
-    setMovieUpComing,
+    movieTopRated,
+    setMovieTopRated,
     navSelect,
     setNavSelect,
     loading,
     setLoading,
     isClicked,
-    setIsClicked
+    setIsClicked,
+    moviePopular,
+    setMoviePopular
   };
 
   return (

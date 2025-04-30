@@ -11,10 +11,10 @@ import AppContext from "../../../context/AppContext";
 import Loading from "../../Loading/Loading";
 
 const SwiperCarousel = () => {
-  const { movieUpComing, setMovieUpComing, loading, setLoading } =
+  const { movieTopRated, setMovieTopRated, loading, setLoading } =
     useContext(AppContext);
 
-  interface Movie {
+  interface MovieTopRated {
     id: number;
     backdrop_path: string;
     overview: string;
@@ -22,21 +22,21 @@ const SwiperCarousel = () => {
   }
 
   interface MoviesResponse {
-    results: Movie[];
+    results: MovieTopRated[];
   }
 
   useEffect(() => {
     setLoading(true);
-    async function reqGet() {
+    async function getMoviesTopRated() {
       try {
         const response = await api.get<MoviesResponse>("/movie/top_rated");
-        setMovieUpComing(response.data.results);
+        setMovieTopRated(response.data.results);
         setLoading(false);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       }
     }
-    reqGet();
+    getMoviesTopRated();
   }, []);
 
   return (
@@ -51,7 +51,7 @@ const SwiperCarousel = () => {
       {loading ? (
         <Loading />
       ) : (
-        movieUpComing.map((movie) => (
+        movieTopRated.map((movie) => (
           <SwiperSlide key={movie.id}>
             <Container>
               <h1>{movie.title}</h1>

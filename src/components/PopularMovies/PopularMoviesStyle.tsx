@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-  height: 400px;
+  /* height: 400px; */
   width: 100%;
   background: linear-gradient(to bottom, var(--color-background-gradient));
 `;
@@ -14,6 +14,8 @@ export const Box = styled.div`
 export const AreaTitle = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 30px;
+
   h1 {
     color: white;
     font-size: 40px;
