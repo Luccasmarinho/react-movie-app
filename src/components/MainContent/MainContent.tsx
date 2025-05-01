@@ -3,6 +3,7 @@ import { useContext } from "react";
 import Landing from "../Landing/Landing";
 import SectionCards from "../SectionCards/SectionCards";
 import AppContext from "../../context/AppContext";
+import MovieVideo from "../MovieVideo/MovieVideo"
 
 const MainContent = () => {
   const { moviePopular, movieUpComing, setMoviePopular, setMovieUpComing } =
@@ -22,6 +23,7 @@ const MainContent = () => {
         setMovie={setMovieUpComing}
         paramsMovie="/upcoming"
       />
+      <MovieVideo />
     </main>
   );
 };

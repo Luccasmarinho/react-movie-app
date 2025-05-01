@@ -49,7 +49,7 @@ const SectionCardsSwiper = ({
 
   useEffect(() => {
     setLoading(true);
-    async function getMoviesPopular(): Promise<void> {
+    async function getMovies(): Promise<void> {
       try {
         const connection = await api.get<MovieResponse>(
           `/movie/${paramsMovie}`
@@ -60,7 +60,7 @@ const SectionCardsSwiper = ({
         console.error("Erro ao buscar dados:", error);
       }
     }
-    getMoviesPopular();
+    getMovies();
   }, []);
 
   async function getMovieTrailerKey(movieId: number): Promise<void> {

@@ -3,7 +3,11 @@ import { HeaderNav, Container } from "./NavbarStyle";
 import NavbarleftSection from "./NavbarLeftSection/NavbarleftSection";
 import NavbarRightSection from "./NavbarRightSection/NavbarRightSection";
 
-const Navbar = ({ scrollMove }: any) => {
+interface scrollMoveProps {
+  scrollMove: boolean;
+}
+
+const Navbar = ({ scrollMove }: scrollMoveProps) => {
   return (
     <HeaderNav scrollMove={scrollMove}>
       <Container>
