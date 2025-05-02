@@ -1,10 +1,11 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 interface scrollMoveProps {
   scrollMove: boolean;
 }
 
-export const HeaderNav = styled.header.withConfig({
+export const HeaderNav = styled(motion.header).withConfig({
   shouldForwardProp: (prop) => prop !== "scrollMove",
 })<scrollMoveProps>`
   width: 100%;
