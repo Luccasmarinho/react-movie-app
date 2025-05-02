@@ -1,5 +1,6 @@
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import AppContext from "./AppContext";
+import { Series, PropsChildren } from "../types/series/series";
 
 interface MovieTopRated {
   id: number;
@@ -15,14 +16,12 @@ interface MoviePopular {
   poster_path: string;
 }
 
-interface PropsChildren {
-  children: ReactNode;
-}
-
 function AppProvider({ children }: PropsChildren) {
   const [movieTopRated, setMovieTopRated] = useState<MovieTopRated[]>([]);
   const [moviePopular, setMoviePopular] = useState<MoviePopular[]>([]);
   const [movieUpComing, setMovieUpComing] = useState<MoviePopular[]>([]);
+  const [seriesPopular, setSeriesPopular] = useState<Series[]>([]);
+  const [seriesTopRated, setSeriesTopRated] = useState<Series[]>([]);
   const [navSelect, setNavSelect] = useState<string>("home");
   const [loading, setLoading] = useState<boolean>(false);
   const [isClicked, setIsClicked] = useState<boolean>(false);
@@ -39,7 +38,11 @@ function AppProvider({ children }: PropsChildren) {
     moviePopular,
     setMoviePopular,
     movieUpComing,
-    setMovieUpComing
+    setMovieUpComing,
+    seriesPopular,
+    setSeriesPopular,
+    seriesTopRated,
+    setSeriesTopRated,
   };
 
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

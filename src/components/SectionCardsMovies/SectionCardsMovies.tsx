@@ -1,6 +1,6 @@
 // import React from "react";
-import SectionCardsSwiper from "./SectionCardsSwiper/SectionCardsSwiper";
-import { Container, Box, AreaTitle } from "./SectionCardsStyle";
+import CardsMovieSwiper from "./CardsMoviesSwiper/CardsMoviesSwiper";
+import { Container, Box, AreaTitle } from "./SectionCardsMoviesStyle";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
 interface MoviePopular {
@@ -17,7 +17,7 @@ interface SectionCardsProps {
   setMovie: React.Dispatch<React.SetStateAction<MoviePopular[]>>;
 }
 
-const SectionCards = ({
+const SectionCardsMovies = ({
   title,
   movieList,
   paramsMovie,
@@ -33,7 +33,7 @@ const SectionCards = ({
             <KeyboardDoubleArrowRightIcon fontSize="small" />
           </button>
         </AreaTitle>
-        <SectionCardsSwiper
+        <CardsMovieSwiper
           setMovie={setMovie}
           movieList={movieList}
           paramsMovie={paramsMovie}
@@ -43,4 +43,4 @@ const SectionCards = ({
   );
 };
 
-export default SectionCards;
+export default SectionCardsMovies;

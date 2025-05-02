@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
+
 
 export const StyledWrapper = styled.div`
   .form {
@@ -106,3 +108,7 @@ export const StyledWrapper = styled.div`
     -webkit-transition-delay: 9999s;
   }
 `;
+
+export const StyledButton = styled(motion.button)`
+
+`

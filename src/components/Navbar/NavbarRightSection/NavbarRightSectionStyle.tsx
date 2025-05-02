@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { motion } from "framer-motion";
 
 interface StyledButtonProps {
   isClicked: boolean;
@@ -28,6 +29,8 @@ export const StyledButtonSearch = styled.button.withConfig({
 })<StyledButtonProps>`
   visibility: ${({ isClicked }) => (isClicked ? "hidden" : "visible")};
 `;
+
+export const StyledInputSearch = styled(motion.section)``;
 
 export const StyledSearchIcon = styled(SearchIcon)`
   color: white;

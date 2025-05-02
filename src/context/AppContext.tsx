@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import { Series } from "../types/series/series"
 
 interface MovieTopRated {
   id: number;
@@ -22,15 +23,16 @@ interface AppContextType {
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   isClicked: boolean;
-  setIsClicked: React.Dispatch<React.SetStateAction<boolean>>
+  setIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
   moviePopular: MoviePopular[];
-  setMoviePopular: React.Dispatch<React.SetStateAction<MoviePopular[]>>
+  setMoviePopular: React.Dispatch<React.SetStateAction<MoviePopular[]>>;
   movieUpComing: MoviePopular[];
-  setMovieUpComing: React.Dispatch<React.SetStateAction<MoviePopular[]>>
-
+  setMovieUpComing: React.Dispatch<React.SetStateAction<MoviePopular[]>>;
+  seriesPopular: Series[];
+  setSeriesPopular: React.Dispatch<React.SetStateAction<Series[]>>;
+  seriesTopRated: Series[];
+  setSeriesTopRated:React.Dispatch<React.SetStateAction<Series[]>>;
 }
-
-
 
 const AppContext = createContext<AppContextType>({} as AppContextType);
 

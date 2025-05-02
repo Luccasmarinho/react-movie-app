@@ -1,10 +1,12 @@
 // import React from 'react';
 import { useContext } from "react";
-import { StyledWrapper } from "./InputSearchStyle";
-import CancelIcon from '@mui/icons-material/Cancel';
+import { StyledWrapper, StyledButton } from "./InputSearchStyle";
+import CancelIcon from "@mui/icons-material/Cancel";
 import AppContext from "../../context/AppContext";
+import { AnimatePresence } from "framer-motion";
+
 const InputSearch = () => {
-  const { setIsClicked } = useContext(AppContext);
+  const { isClicked, setIsClicked } = useContext(AppContext);
   return (
     <StyledWrapper>
       <form className="form">
@@ -27,9 +29,23 @@ const InputSearch = () => {
               </g>
             </svg>
           </div>
-          <button type="button" onClick={() => setIsClicked(false)}>
-            <CancelIcon />
-          </button>
+          <AnimatePresence>
+            {isClicked && (
+              <StyledButton
+                initial={{ opacity: 0, height: 0, y: -60 }}
+                animate={{ opacity: 1, height: "auto", y: 0 }}
+                exit={{ opacity: 0, height: 0, y: -60 }}
+                transition={{
+                  duration: 0.3,
+                  ease: "easeOut",
+                }}
+                type="button"
+                onClick={() => setIsClicked(false)}
+              >
+                <CancelIcon />
+              </StyledButton>
+            )}
+          </AnimatePresence>
         </label>
       </form>
     </StyledWrapper>

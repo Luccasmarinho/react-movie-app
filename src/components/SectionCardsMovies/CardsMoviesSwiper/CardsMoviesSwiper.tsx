@@ -11,7 +11,7 @@ import {
   SwiperStyled,
   AreaCard,
   AreaTitleRating,
-} from "./SectionCardsSwiperStyle";
+} from "./CardsMoviesSwiperStyle";
 import HalfRating from "../../HalfRating/HalfRating";
 
 interface MoviePopular {
@@ -39,7 +39,7 @@ interface moviesProps {
   paramsMovie: string;
 }
 
-const SectionCardsSwiper = ({
+const CardsMovieSwiper = ({
   setMovie,
   movieList,
   paramsMovie,
@@ -113,4 +113,4 @@ const SectionCardsSwiper = ({
   );
 };
 
-export default SectionCardsSwiper;
+export default CardsMovieSwiper;
