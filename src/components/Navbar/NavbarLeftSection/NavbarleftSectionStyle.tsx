@@ -16,7 +16,7 @@ export const AreaTitleImg = styled.div`
   margin-right: 50px;
 
   img {
-    width: 70px;
+    width: var(--width-logo);
   }
 
   h2 {

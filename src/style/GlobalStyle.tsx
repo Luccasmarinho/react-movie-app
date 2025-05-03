@@ -15,6 +15,7 @@ export const GlobalStyle = createGlobalStyle`
         --color-background-gradient: #500308, #AB0511;
         --font-subtitle: "Poppins", sans-serif;
         --font-button: "Montserrat", sans-serif;
+        --width-logo: 70px;
     }
 
     body {
