@@ -7,7 +7,7 @@ import MovieVideo from "../MovieVideo/MovieVideo";
 import SectionCardsSeries from "../SectionCardsSeries/SectionCardsSeries";
 import BackToTopButton from "../BackToTopButton/BackTopTopButton";
 
-const MainContent = () => { 
+const MainContent = () => {
   const {
     moviePopular,
     movieUpComing,

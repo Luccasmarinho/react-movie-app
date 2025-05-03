@@ -7,7 +7,7 @@ const MovieVideo = () => {
   const [idMovieNowPlaying, setIdMovieNowPLaying] = useState<number>();
   const [movieKey, setMovieKey] = useState<string>();
   const { loading, setLoading } = useContext(AppContext);
-
+  const [indice, setIndice] = useState<number>(0);
   interface MoviePlayingNowId {
     id: number;
   }
@@ -43,14 +43,24 @@ const MovieVideo = () => {
         const connection = await api.get<MovieResponse<MovieVideos[]>>(
           `/movie/${idMovieNowPlaying}/videos`
         );
-        setMovieKey(connection.data.results[0].key);
+
+        while (connection.data.results.length == 0) {
+          setIndice((prev) => prev + 1);
+          const connectionNowPlaying = await api.get<
+            MovieResponse<MoviePlayingNowId[]>
+          >("/movie/now_playing");
+          setIdMovieNowPLaying(connectionNowPlaying.data.results[indice].id);
+          return;
+        }
+
+        setMovieKey(connection.data.results[0]?.key);
         setLoading(false);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       }
     }
     getKeyVideo();
-  }, [idMovieNowPlaying]);
+  }, [idMovieNowPlaying, indice]);
 
   return (
     <section style={{ position: "relative" }}>
