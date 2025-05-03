@@ -32,6 +32,8 @@ interface AppContextType {
   setSeriesPopular: React.Dispatch<React.SetStateAction<Series[]>>;
   seriesTopRated: Series[];
   setSeriesTopRated:React.Dispatch<React.SetStateAction<Series[]>>;
+  scrollMove: boolean;
+  setScrollMove: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AppContext = createContext<AppContextType>({} as AppContextType);

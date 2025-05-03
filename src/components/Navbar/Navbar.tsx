@@ -1,22 +1,19 @@
 import { HeaderNav, Container } from "./NavbarStyle";
 import NavbarleftSection from "./NavbarLeftSection/NavbarleftSection";
 import NavbarRightSection from "./NavbarRightSection/NavbarRightSection";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
+import AppContext from "../../context/AppContext";
+import { handleScroll } from "../../utils/utils"
 
 const Navbar = () => {
-  const [scrollMove, setScrollMove] = useState<boolean>(false);
+  const { scrollMove, setScrollMove } = useContext(AppContext);
 
   useEffect(() => {
-    function handleScroll(): void {
-      const scroll: number = window.scrollY;
-      scroll > 10 ? setScrollMove(true) : setScrollMove(false);
-    }
-
-    window.addEventListener("scroll", handleScroll);
+       window.addEventListener("scroll", () => handleScroll(setScrollMove));
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", () => handleScroll(setScrollMove));
     };
   }, []);
 
@@ -31,6 +28,7 @@ const Navbar = () => {
 
       {scrollMove && (
         <HeaderNav
+          key="header"
           scrollMove={scrollMove}
           initial={{ opacity: 0, height: 0, y: -60 }}
           animate={{ opacity: 1, height: "auto", y: 0 }}

@@ -25,6 +25,7 @@ function AppProvider({ children }: PropsChildren) {
   const [navSelect, setNavSelect] = useState<string>("home");
   const [loading, setLoading] = useState<boolean>(false);
   const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [scrollMove, setScrollMove] = useState<boolean>(false);
 
   const values = {
     movieTopRated,
@@ -43,6 +44,8 @@ function AppProvider({ children }: PropsChildren) {
     setSeriesPopular,
     seriesTopRated,
     setSeriesTopRated,
+    scrollMove,
+    setScrollMove
   };
 
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

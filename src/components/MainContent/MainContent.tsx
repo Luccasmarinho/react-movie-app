@@ -5,8 +5,9 @@ import SectionCardsMovies from "../SectionCardsMovies/SectionCardsMovies";
 import AppContext from "../../context/AppContext";
 import MovieVideo from "../MovieVideo/MovieVideo";
 import SectionCardsSeries from "../SectionCardsSeries/SectionCardsSeries";
+import BackToTopButton from "../BackToTopButton/BackTopTopButton";
 
-const MainContent = () => {
+const MainContent = () => { 
   const {
     moviePopular,
     movieUpComing,
@@ -45,6 +46,7 @@ const MainContent = () => {
         setSerie={setSeriesTopRated}
         paramsSerie="/top_rated"
       />
+      <BackToTopButton />
     </main>
   );
 };
