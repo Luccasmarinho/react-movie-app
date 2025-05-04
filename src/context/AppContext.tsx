@@ -1,19 +1,6 @@
 import { createContext } from "react";
 import { Series } from "../types/series/series"
-
-interface MovieTopRated {
-  id: number;
-  backdrop_path: string;
-  overview: string;
-  title: string;
-}
-
-interface MoviePopular {
-  id: number;
-  title: string;
-  vote_average: number;
-  poster_path: string;
-}
+import { MovieTopRated, MoviePopular } from "../types/movies/movies"
 
 interface AppContextType {
   movieTopRated: MovieTopRated[];

@@ -1,8 +1,5 @@
 import styled from "styled-components";
-
-export interface StyledLiProps {
-  navSelect: string;
-}
+import { StyledLiProps } from "../../../types/common/common"
 
 export const LeftSection = styled.div`
   display: flex;

@@ -1,9 +1,6 @@
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
-
-interface VoteProps {
-  vote: number;
-}
+import { VoteProps } from "../../types/common/common"
 
 export default function HalfRating({ vote }: VoteProps) {
   return (

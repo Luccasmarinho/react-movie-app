@@ -13,37 +13,13 @@ import {
   AreaTitleRating,
 } from "./CardsMoviesSwiperStyle";
 import HalfRating from "../../HalfRating/HalfRating";
-
-interface MoviePopular {
-  id: number;
-  title: string;
-  vote_average: number;
-  poster_path: string;
-}
-
-interface MovieResponse {
-  results: MoviePopular[];
-}
-
-interface MovieTrailer {
-  key: string;
-}
-
-interface MovieTrailerResponse {
-  results: MovieTrailer[];
-}
-
-interface moviesProps {
-  setMovie: React.Dispatch<React.SetStateAction<MoviePopular[]>>;
-  movieList: MoviePopular[];
-  paramsMovie: string;
-}
+import { MoviePopular, MoviesResponse, MovieTrailer, MoviesProps } from "../../../types/movies/movies"
 
 const CardsMovieSwiper = ({
   setMovie,
   movieList,
   paramsMovie,
-}: moviesProps) => {
+}: MoviesProps) => {
   const { loading, setLoading } = useContext(AppContext);
   const [keyTrailer, setKeyTrailer] = useState<string | undefined>();
 
@@ -51,7 +27,7 @@ const CardsMovieSwiper = ({
     setLoading(true);
     async function getMovies(): Promise<void> {
       try {
-        const connection = await api.get<MovieResponse>(
+        const connection = await api.get<MoviesResponse<MoviePopular[]>>(
           `/movie/${paramsMovie}`
         );
         setMovie(connection.data.results);
@@ -65,7 +41,7 @@ const CardsMovieSwiper = ({
 
   async function getMovieTrailerKey(movieId: number): Promise<void> {
     try {
-      const connection = await api.get<MovieTrailerResponse>(
+      const connection = await api.get<MoviesResponse<MovieTrailer[]>>(
         `/movie/${movieId}/videos`
       );
       setKeyTrailer(connection.data.results[0].key);

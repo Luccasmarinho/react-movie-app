@@ -2,10 +2,7 @@ import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { motion } from "framer-motion";
-
-interface StyledButtonProps {
-  isClicked: boolean;
-}
+import { StyledButtonProps } from "../../../types/common/common";
 
 export const RightSection = styled.div`
   display: flex;

@@ -2,29 +2,23 @@ import { useContext, useEffect, useState } from "react";
 import { api } from "../../service/api";
 import AppContext from "../../context/AppContext";
 import Loading from "../Loading/Loading";
+import {
+  MoviesResponse,
+  MoviePlayingNowId,
+  MovieVideos,
+} from "../../types/movies/movies";
 
 const MovieVideo = () => {
   const [idMovieNowPlaying, setIdMovieNowPLaying] = useState<number>();
   const [movieKey, setMovieKey] = useState<string>();
   const { loading, setLoading } = useContext(AppContext);
   const [indice, setIndice] = useState<number>(0);
-  interface MoviePlayingNowId {
-    id: number;
-  }
-
-  interface MovieVideos {
-    key: string;
-  }
-
-  interface MovieResponse<T> {
-    results: T;
-  }
 
   useEffect(() => {
     async function getIdMovieNowPlaying(): Promise<void> {
       try {
         const connectionNowPlaying = await api.get<
-          MovieResponse<MoviePlayingNowId[]>
+          MoviesResponse<MoviePlayingNowId[]>
         >("/movie/now_playing");
         setIdMovieNowPLaying(connectionNowPlaying.data.results[0].id);
       } catch (error) {
@@ -40,14 +34,14 @@ const MovieVideo = () => {
     async function getKeyVideo(): Promise<void> {
       if (!idMovieNowPlaying) return;
       try {
-        const connection = await api.get<MovieResponse<MovieVideos[]>>(
+        const connection = await api.get<MoviesResponse<MovieVideos[]>>(
           `/movie/${idMovieNowPlaying}/videos`
         );
 
         while (connection.data.results.length == 0) {
           setIndice((prev) => prev + 1);
           const connectionNowPlaying = await api.get<
-            MovieResponse<MoviePlayingNowId[]>
+            MoviesResponse<MoviePlayingNowId[]>
           >("/movie/now_playing");
           setIdMovieNowPLaying(connectionNowPlaying.data.results[indice].id);
           return;
