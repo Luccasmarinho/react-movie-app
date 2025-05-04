@@ -21,3 +21,10 @@ export interface CardsSeriesProps {
 export interface PropsChildren {
     children: ReactNode;
 }
+
+export interface SeriesContextType {
+  seriesPopular: Series[];
+  setSeriesPopular: React.Dispatch<React.SetStateAction<Series[]>>;
+  seriesTopRated: Series[];
+  setSeriesTopRated:React.Dispatch<React.SetStateAction<Series[]>>;
+}

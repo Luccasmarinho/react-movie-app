@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import Home from "./pages/Home/Home";
 import { GlobalStyle } from "./style/GlobalStyle";
 import AppProvider from "./context/ProviderApp";
+import ProviderWrapper from "./context/ProviderWrapper";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
