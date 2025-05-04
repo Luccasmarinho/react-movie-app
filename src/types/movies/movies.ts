@@ -1,23 +1,20 @@
-export interface MovieTopRated {
+export interface Movie {
     id: number;
     title: string;
+}
+
+export interface MovieTopRated extends Movie {
     backdrop_path: string;
     overview: string;
 }
 
-export interface MoviePopular {
-    id: number;
-    title: string;
+export interface MoviePopular extends Movie {
     vote_average: number;
     poster_path: string;
 }
 
 export interface MoviePlayingNowId {
     id: number;
-}
-
-export interface MovieVideos {
-    key: string;
 }
 
 export interface MovieTrailer {
@@ -29,17 +26,16 @@ export interface MoviesResponse<T> {
 }
 
 export interface MoviesProps {
-    setMovie: React.Dispatch<React.SetStateAction<MoviePopular[]>>;
     movieList: MoviePopular[];
     paramsMovie: string;
+    setMovie: React.Dispatch<React.SetStateAction<MoviePopular[]>>;
 }
 
-export interface SectionCardsProps {
+export interface SectionCardsProps extends MoviesProps{
     title: string;
-    movieList: MoviePopular[];
-    paramsMovie: string;
-    setMovie: React.Dispatch<React.SetStateAction<MoviePopular[]>>;
 }
+
+
 
 //   export interface AppContextType {
 //     movieTopRated: MovieTopRated[];

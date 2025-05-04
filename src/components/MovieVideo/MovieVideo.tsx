@@ -5,7 +5,7 @@ import Loading from "../Loading/Loading";
 import {
   MoviesResponse,
   MoviePlayingNowId,
-  MovieVideos,
+  MovieTrailer,
 } from "../../types/movies/movies";
 
 const MovieVideo = () => {
@@ -34,7 +34,7 @@ const MovieVideo = () => {
     async function getKeyVideo(): Promise<void> {
       if (!idMovieNowPlaying) return;
       try {
-        const connection = await api.get<MoviesResponse<MovieVideos[]>>(
+        const connection = await api.get<MoviesResponse<MovieTrailer[]>>(
           `/movie/${idMovieNowPlaying}/videos`
         );
 
