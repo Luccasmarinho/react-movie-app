@@ -8,6 +8,7 @@ export const Container = styled.section`
   padding: 0 18px;
   gap: 31px;
   flex-wrap: wrap;
+  position: relative;
 `;
 
 export const AreaCard = styled.div`
