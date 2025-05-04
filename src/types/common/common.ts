@@ -30,3 +30,11 @@ export interface CommonContextType {
     scrollMove: boolean;
     setScrollMove: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+export interface CardsProps {
+    id: number;
+    poster_path: string;
+    title?: string;
+    name?: string;
+    vote_average: number;
+}

@@ -1,12 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import HalfRating from "../../HalfRating/HalfRating";
-import {
-  AreaCard,
-  AreaTitleRating,
-  AreaCardHide,
-  AreaButton,
-  Container,
-} from "./CardsSeriesStyle";
+import { AreaButton, Container } from "./CardsSeriesStyle";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
@@ -15,6 +8,7 @@ import { api } from "../../../service/api";
 import { SeriesResponse, CardsSeriesProps } from "../../../types/series/series";
 import { CommonContext } from "../../../context/Common/CommonContext";
 import Loading from "../../Loading/Loading";
+import Cards from "../../Cards/Cards";
 
 const CardsSeries = ({
   serieList,
@@ -52,18 +46,13 @@ const CardsSeries = ({
       <Container>
         {loading && <Loading />}
         {serieList.slice(start, end).map((serie) => (
-          <AreaCard key={serie.id}>
-            <section>
-              <img
-                src={`https://image.tmdb.org/t/p/original${serie.poster_path}`}
-                alt={`Poster série${serie.name}`}
-              />
-              <AreaTitleRating>
-                <p>{serie.name}</p>
-                <HalfRating vote={serie.vote_average / 2} />
-              </AreaTitleRating>
-            </section>
-          </AreaCard>
+          <Cards
+            key={serie.id}
+            id={serie.id}
+            poster_path={`https://image.tmdb.org/t/p/original${serie.poster_path}`}
+            name={serie.name}
+            vote_average={serie.vote_average / 2}
+          />
         ))}
       </Container>
       <AreaButton>
@@ -74,32 +63,27 @@ const CardsSeries = ({
       </AreaButton>
       <AnimatePresence>
         {isActive && (
-          <Container>
+          <Container
+            key="cardsHide"
+            initial={{ opacity: 0, height: 0, y: -60 }}
+            animate={{ opacity: 1, height: "auto", y: 0 }}
+            exit={{ opacity: 0, height: 0, y: -60 }}
+            transition={{
+              duration: 0.3,
+              ease: "easeOut",
+            }}
+          >
             {loading && <Loading />}
             {serieList
               .slice(start + cardsTotal, end + cardsTotal)
               .map((serie) => (
-                <AreaCardHide
+                <Cards
                   key={serie.id}
-                  initial={{ opacity: 0, height: 0, y: -60 }}
-                  animate={{ opacity: 1, height: "auto", y: 0 }}
-                  exit={{ opacity: 0, height: 0, y: -60 }}
-                  transition={{
-                    duration: 0.3,
-                    ease: "easeOut",
-                  }}
-                >
-                  <section>
-                    <img
-                      src={`https://image.tmdb.org/t/p/original${serie.poster_path}`}
-                      alt={`Poster série${serie.name}`}
-                    />
-                    <AreaTitleRating>
-                      <p>{serie.name}</p>
-                      <HalfRating vote={serie.vote_average / 2} />
-                    </AreaTitleRating>
-                  </section>
-                </AreaCardHide>
+                  id={serie.id}
+                  poster_path={`https://image.tmdb.org/t/p/original${serie.poster_path}`}
+                  name={serie.name}
+                  vote_average={serie.vote_average / 2}
+                />
               ))}
           </Container>
         )}

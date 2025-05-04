@@ -1,19 +1,18 @@
-// import React from 'react'
 import { SwiperSlide } from "swiper/react";
 import "swiper/css"; // Importando o estilo base
 import "swiper/css/navigation"; // Se quiser navegação (setinhas)
 import { Navigation, Autoplay } from "swiper/modules"; // Importar o módulo de navegação (se quiser setas)
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { api } from "../../../service/api";
 import Loading from "../../Loading/Loading";
+import { SwiperStyled } from "./CardsMoviesSwiperStyle";
 import {
-  SwiperStyled,
-  AreaCard,
-  AreaTitleRating,
-} from "./CardsMoviesSwiperStyle";
-import HalfRating from "../../HalfRating/HalfRating";
-import { MoviePopular, MoviesResponse, MovieTrailer, MoviesProps } from "../../../types/movies/movies"
+  MoviePopular,
+  MoviesResponse,
+  MoviesProps,
+} from "../../../types/movies/movies";
 import { CommonContext } from "../../../context/Common/CommonContext";
+import Cards from "../../Cards/Cards";
 
 const CardsMovieSwiper = ({
   setMovie,
@@ -21,7 +20,6 @@ const CardsMovieSwiper = ({
   paramsMovie,
 }: MoviesProps) => {
   const { loading, setLoading } = useContext(CommonContext);
-  const [_, setKeyTrailer] = useState<string | undefined>();
 
   useEffect(() => {
     setLoading(true);
@@ -38,17 +36,6 @@ const CardsMovieSwiper = ({
     }
     getMovies();
   }, []);
-
-  async function getMovieTrailerKey(movieId: number): Promise<void> {
-    try {
-      const connection = await api.get<MoviesResponse<MovieTrailer[]>>(
-        `/movie/${movieId}/videos`
-      );
-      setKeyTrailer(connection.data.results[0].key);
-    } catch (error) {
-      console.error("Erro ao buscar dados:", error);
-    }
-  }
 
   return (
     <SwiperStyled
@@ -70,18 +57,13 @@ const CardsMovieSwiper = ({
       ) : (
         movieList.map((movie) => (
           <SwiperSlide key={movie.id}>
-            <AreaCard onClick={() => getMovieTrailerKey(movie.id)}>
-              <section>
-                <img
-                  src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                  alt="Poster filme"
-                />
-                <AreaTitleRating>
-                  <p>{movie.title}</p>
-                  <HalfRating vote={movie.vote_average / 2} />
-                </AreaTitleRating>
-              </section>
-            </AreaCard>
+            <Cards
+              key={movie.id}
+              id={movie.id}
+              poster_path={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+              vote_average={movie.vote_average / 2}
+              title={movie.title}
+            />
           </SwiperSlide>
         ))
       )}
