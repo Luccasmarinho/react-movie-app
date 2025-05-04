@@ -21,7 +21,7 @@ const CardsMovieSwiper = ({
   paramsMovie,
 }: MoviesProps) => {
   const { loading, setLoading } = useContext(AppContext);
-  const [keyTrailer, setKeyTrailer] = useState<string | undefined>();
+  const [_, setKeyTrailer] = useState<string | undefined>();
 
   useEffect(() => {
     setLoading(true);
