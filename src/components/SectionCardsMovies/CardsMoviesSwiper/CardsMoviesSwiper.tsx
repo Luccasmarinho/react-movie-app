@@ -5,7 +5,6 @@ import "swiper/css/navigation"; // Se quiser navegação (setinhas)
 import { Navigation, Autoplay } from "swiper/modules"; // Importar o módulo de navegação (se quiser setas)
 import { useContext, useEffect, useState } from "react";
 import { api } from "../../../service/api";
-import AppContext from "../../../context/AppContext";
 import Loading from "../../Loading/Loading";
 import {
   SwiperStyled,
@@ -14,13 +13,14 @@ import {
 } from "./CardsMoviesSwiperStyle";
 import HalfRating from "../../HalfRating/HalfRating";
 import { MoviePopular, MoviesResponse, MovieTrailer, MoviesProps } from "../../../types/movies/movies"
+import { CommonContext } from "../../../context/Common/CommonContext";
 
 const CardsMovieSwiper = ({
   setMovie,
   movieList,
   paramsMovie,
 }: MoviesProps) => {
-  const { loading, setLoading } = useContext(AppContext);
+  const { loading, setLoading } = useContext(CommonContext);
   const [_, setKeyTrailer] = useState<string | undefined>();
 
   useEffect(() => {

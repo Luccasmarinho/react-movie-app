@@ -1,18 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import { api } from "../../service/api";
-import AppContext from "../../context/AppContext";
 import Loading from "../Loading/Loading";
 import {
   MoviesResponse,
   MoviePlayingNowId,
   MovieTrailer,
 } from "../../types/movies/movies";
+import { CommonContext } from "../../context/Common/CommonContext";
 
 const MovieVideo = () => {
   const [idMovieNowPlaying, setIdMovieNowPLaying] = useState<number>();
   const [movieKey, setMovieKey] = useState<string>();
-  const { loading, setLoading } = useContext(AppContext);
   const [indice, setIndice] = useState<number>(0);
+  const { loading, setLoading } = useContext(CommonContext);
 
   useEffect(() => {
     async function getIdMovieNowPlaying(): Promise<void> {

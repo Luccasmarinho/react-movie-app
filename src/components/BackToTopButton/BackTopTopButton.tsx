@@ -1,10 +1,10 @@
 import { AnimatePresence } from "framer-motion";
 import { StyledWrapper } from "./BackTopTopButtonStyle";
 import { useContext, useEffect } from "react";
-import AppContext from "../../context/AppContext";
 import { handleScroll } from "../../utils/utils";
+import { CommonContext } from "../../context/Common/CommonContext";
 const BackToTopButton = () => {
-  const { scrollMove, setScrollMove } = useContext(AppContext);
+  const { scrollMove, setScrollMove } = useContext(CommonContext);
 
   useEffect(() => {
     window.addEventListener("scroll", () => handleScroll(setScrollMove));

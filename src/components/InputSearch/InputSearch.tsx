@@ -2,11 +2,11 @@
 import { useContext } from "react";
 import { StyledWrapper, StyledButton } from "./InputSearchStyle";
 import CancelIcon from "@mui/icons-material/Cancel";
-import AppContext from "../../context/AppContext";
 import { AnimatePresence } from "framer-motion";
+import { CommonContext } from "../../context/Common/CommonContext";
 
 const InputSearch = () => {
-  const { isClicked, setIsClicked } = useContext(AppContext);
+  const { isClicked, setIsClicked } = useContext(CommonContext);
   return (
     <StyledWrapper>
       <form className="form">

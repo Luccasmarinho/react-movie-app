@@ -7,10 +7,10 @@ import {
 } from "./NavbarleftSectionStyle";
 import image from "../../../assets/popcorn.webp";
 import { useContext } from "react";
-import AppContext from "../../../context/AppContext";
+import { CommonContext } from "../../../context/Common/CommonContext";
 
 const NavbarleftSection = () => {
-  const { navSelect, setNavSelect } = useContext(AppContext);
+  const { navSelect, setNavSelect } = useContext(CommonContext);
 
   return (
     <LeftSection>

@@ -11,12 +11,12 @@ import {
 } from "./NavbarRightSectionStyle";
 import InputSearch from "../../InputSearch/InputSearch";
 import { useContext } from "react";
-import AppContext from "../../../context/AppContext";
 
 import { AnimatePresence } from "framer-motion";
+import { CommonContext } from "../../../context/Common/CommonContext";
 
 const NavbarRightSection = () => {
-  const { isClicked, setIsClicked } = useContext(AppContext);
+  const { isClicked, setIsClicked } = useContext(CommonContext);
   return (
     <RightSection>
       <AnimatePresence>

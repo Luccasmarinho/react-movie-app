@@ -1,23 +1,18 @@
-// import React from 'react'
 import { useContext } from "react";
 import Landing from "../Landing/Landing";
 import SectionCardsMovies from "../SectionCardsMovies/SectionCardsMovies";
-import AppContext from "../../context/AppContext";
 import MovieVideo from "../MovieVideo/MovieVideo";
 import SectionCardsSeries from "../SectionCardsSeries/SectionCardsSeries";
 import BackToTopButton from "../BackToTopButton/BackTopTopButton";
+import { MovieContext } from "../../context/Movie/MovieContext";
+import { SeriesContext } from "../../context/Series/SeriesContext";
 
 const MainContent = () => {
-  const {
-    moviePopular,
-    movieUpComing,
-    setMoviePopular,
-    setMovieUpComing,
-    seriesPopular,
-    setSeriesPopular,
-    seriesTopRated,
-    setSeriesTopRated,
-  } = useContext(AppContext);
+  const { moviePopular, movieUpComing, setMoviePopular, setMovieUpComing } =
+    useContext(MovieContext);
+
+  const { seriesPopular, setSeriesPopular, seriesTopRated, setSeriesTopRated } =
+    useContext(SeriesContext);
   return (
     <main>
       <Landing />
