@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { StyledLiProps } from "../../../../types/common/common"
+import { StyledLiProps } from "../../../types/common/common";
+import { Link } from "react-router-dom";
 
 export const LeftSection = styled.div`
   display: flex;
@@ -52,4 +53,8 @@ export const StyledLi = styled.li.withConfig({
 })<StyledLiProps>`
   background-color: ${({ navSelect, id }) =>
     navSelect == id ? "var(--color-main-red)" : "transparent"};
+`;
+
+export const StyledLink = styled(Link)`
+  color: white;
 `;

@@ -7,6 +7,7 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         list-style: none;
         outline: none;
+        text-decoration: none;
         font-family: "Special Gothic Expanded One", sans-serif;
     }
 

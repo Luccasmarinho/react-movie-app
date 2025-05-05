@@ -4,10 +4,11 @@ import {
   AreaTitleImg,
   ListNavegation,
   StyledLi,
+  StyledLink,
 } from "./NavbarleftSectionStyle";
-import image from "../../../../assets/popcorn.webp";
+import image from "../../../assets/popcorn.webp";
 import { useContext } from "react";
-import { CommonContext } from "../../../../context/Common/CommonContext";
+import { CommonContext } from "../../../context/Common/CommonContext";
 
 const NavbarleftSection = () => {
   const { navSelect, setNavSelect } = useContext(CommonContext);
@@ -22,20 +23,26 @@ const NavbarleftSection = () => {
       </AreaTitleImg>
       <ListNavegation>
         <ul>
-          <StyledLi
-            navSelect={navSelect}
-            id="home"
-            onClick={() => setNavSelect("home")}
-          >
-            Home
-          </StyledLi>
-          <StyledLi
-            navSelect={navSelect}
-            id="filmes"
-            onClick={() => setNavSelect("filmes")}
-          >
-            Filmes
-          </StyledLi>
+          <StyledLink to={"/"}>
+            <StyledLi
+              navSelect={navSelect}
+              id="home"
+              onClick={() => setNavSelect("home")}
+            >
+              Home
+            </StyledLi>
+          </StyledLink>
+
+          <StyledLink to={"/filmes"}>
+            <StyledLi
+              navSelect={navSelect}
+              id="filmes"
+              onClick={() => setNavSelect("filmes")}
+            >
+              Filmes
+            </StyledLi>
+          </StyledLink>
+
           <StyledLi
             navSelect={navSelect}
             id="series"
@@ -43,6 +50,7 @@ const NavbarleftSection = () => {
           >
             Séries
           </StyledLi>
+          
           <StyledLi
             navSelect={navSelect}
             id="favoritos"
@@ -50,6 +58,7 @@ const NavbarleftSection = () => {
           >
             Favoritos
           </StyledLi>
+          
         </ul>
       </ListNavegation>
     </LeftSection>

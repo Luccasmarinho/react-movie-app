@@ -3,14 +3,14 @@ import NavbarleftSection from "./NavbarLeftSection/NavbarleftSection";
 import NavbarRightSection from "./NavbarRightSection/NavbarRightSection";
 import { useContext, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
-import { handleScroll } from "../../../utils/utils"
-import { CommonContext } from "../../../context/Common/CommonContext";
+import { handleScroll } from "../../utils/utils";
+import { CommonContext } from "../../context/Common/CommonContext";
 
 const Navbar = () => {
   const { scrollMove, setScrollMove } = useContext(CommonContext);
 
   useEffect(() => {
-       window.addEventListener("scroll", () => handleScroll(setScrollMove));
+    window.addEventListener("scroll", () => handleScroll(setScrollMove));
 
     return () => {
       window.removeEventListener("scroll", () => handleScroll(setScrollMove));

@@ -1,14 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import Home from "./pages/Home/Home";
 import { GlobalStyle } from "./style/GlobalStyle";
-// import AppProvider from "./context/ProviderApp";
 import ProviderWrapper from "./context/ProviderWrapper";
+import RoutesApp from "./Routes/RoutesApp";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ProviderWrapper>
-      <Home />
+      <RoutesApp />
       <GlobalStyle />
     </ProviderWrapper>
   </StrictMode>

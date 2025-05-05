@@ -1,6 +1,6 @@
 // import React from 'react'
-import NotificationBadge from "../../NotificationBadge/NotificationBadge";
-import ImageAvatar from "../../ImageAvatar/ImageAvatar";
+import NotificationBadge from "../../Home/NotificationBadge/NotificationBadge";
+import ImageAvatar from "../../Home/ImageAvatar/ImageAvatar";
 
 import {
   RightSection,
@@ -9,11 +9,11 @@ import {
   StyledButtonSearch,
   StyledInputSearch,
 } from "./NavbarRightSectionStyle";
-import InputSearch from "../../InputSearch/InputSearch";
+import InputSearch from "../../Home/InputSearch/InputSearch";
 import { useContext } from "react";
 
 import { AnimatePresence } from "framer-motion";
-import { CommonContext } from "../../../../context/Common/CommonContext";
+import { CommonContext } from "../../../context/Common/CommonContext";
 
 const NavbarRightSection = () => {
   const { isClicked, setIsClicked } = useContext(CommonContext);
