@@ -1,4 +1,4 @@
-import HalfRating from "../HalfRating/HalfRating";
+import HalfRating from "../Home/HalfRating/HalfRating";
 import { AreaCard, AreaTitleRating } from "./CardsStyle";
 import { CardsProps } from "../../types/common/common";
 import { MoviesResponse, MovieTrailer } from "../../types/movies/movies";

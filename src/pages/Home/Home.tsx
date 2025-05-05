@@ -1,6 +1,6 @@
-import Navbar from "../../components/Navbar/Navbar";
-import MainContent from "../../components/MainContent/MainContent";
-import Footer from "../../components/Footer/Footer";
+import Navbar from "../../components/Home/Navbar/Navbar";
+import MainContent from "../../components/Home/MainContent/MainContent";
+import Footer from "../../components/Home/Footer/Footer";
 
 const Home = () => {
   return (
