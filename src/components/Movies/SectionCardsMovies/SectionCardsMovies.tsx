@@ -15,12 +15,11 @@ import {
 } from "../../../types/movies/movies";
 import { MovieContext } from "../../../context/Movie/MovieContext";
 import { CommonContext } from "../../../context/Common/CommonContext";
-import Loading from "../../Home/Loading/Loading";
 import { useSearchParams } from "react-router-dom";
 
 const SectionCardsMovies = () => {
   const { AllMovies, setAllMovies } = useContext(MovieContext);
-  const { loading, setLoading } = useContext(CommonContext);
+  const { setLoading } = useContext(CommonContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || 1;
 
@@ -43,6 +42,7 @@ const SectionCardsMovies = () => {
 
   function handleChange(_: React.ChangeEvent<unknown>, newValue: number) {
     setSearchParams({ page: newValue.toString() });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   return (
@@ -52,7 +52,6 @@ const SectionCardsMovies = () => {
       </AreaTitle>
       <Box>
         <AreaCard>
-          {loading && <Loading />}
           {AllMovies.map((movie) => (
             <Cards
               key={movie.id}

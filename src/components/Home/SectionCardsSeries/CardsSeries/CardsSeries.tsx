@@ -7,7 +7,6 @@ import { AnimatePresence } from "framer-motion";
 import { api } from "../../../../service/api";
 import { SeriesResponse, CardsSeriesProps } from "../../../../types/series/series";
 import { CommonContext } from "../../../../context/Common/CommonContext";
-import Loading from "../../Loading/Loading";
 import Cards from "../../../Cards/Cards";
 
 const CardsSeries = ({
@@ -16,7 +15,7 @@ const CardsSeries = ({
   paramsSerie,
 }: CardsSeriesProps) => {
   const [isActive, setIsActive] = useState<boolean>(false);
-  const { loading, setLoading } = useContext(CommonContext);
+  const { setLoading } = useContext(CommonContext);
   const cardsTotal: number = 4;
   const indice: number = 0; //max 3
 
@@ -44,7 +43,6 @@ const CardsSeries = ({
   return (
     <>
       <Container>
-        {loading && <Loading />}
         {serieList.slice(start, end).map((serie) => (
           <Cards
             key={serie.id}
@@ -73,7 +71,6 @@ const CardsSeries = ({
               ease: "easeOut",
             }}
           >
-            {loading && <Loading />}
             {serieList
               .slice(start + cardsTotal, end + cardsTotal)
               .map((serie) => (

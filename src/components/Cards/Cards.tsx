@@ -1,11 +1,16 @@
 import HalfRating from "../Home/HalfRating/HalfRating";
 import { AreaCard, AreaTitleRating } from "./CardsStyle";
 import { CardsProps } from "../../types/common/common";
+import SkeletonCards from "../SkeletonCards/SkeletonCards";
+import { useContext } from "react";
+import { CommonContext } from "../../context/Common/CommonContext";
 // import { MoviesResponse, MovieTrailer } from "../../types/movies/movies";
 // import { api } from "../../service/api";
 // import { useState } from "react";
 
 const Cards = ({ id, poster_path, title, name, vote_average }: CardsProps) => {
+  const { loading } = useContext(CommonContext);
+
   // const [_, setKeyTrailer] = useState<string | undefined>();
 
   // async function getMovieTrailerKey(movieId: number): Promise<void> {
@@ -21,16 +26,20 @@ const Cards = ({ id, poster_path, title, name, vote_average }: CardsProps) => {
 
   return (
     <AreaCard key={id}>
-      <section>
-        <img
-          src={`https://image.tmdb.org/t/p/original${poster_path}`}
-          alt={`Poster ${title || name}`}
-        />
-        <AreaTitleRating>
-          <p>{title || name}</p>
-          <HalfRating vote={vote_average} />
-        </AreaTitleRating>
-      </section>
+      {loading ? (
+        <SkeletonCards />
+      ) : (
+        <section>
+          <img
+            src={`https://image.tmdb.org/t/p/original${poster_path}`}
+            alt={`Poster ${title || name}`}
+          />
+          <AreaTitleRating>
+            <p>{title || name}</p>
+            <HalfRating vote={vote_average} />
+          </AreaTitleRating>
+        </section>
+      )}
     </AreaCard>
   );
 };

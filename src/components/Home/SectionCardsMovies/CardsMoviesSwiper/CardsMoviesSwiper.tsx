@@ -4,7 +4,6 @@ import "swiper/css/navigation"; // Se quiser navegação (setinhas)
 import { Navigation, Autoplay } from "swiper/modules"; // Importar o módulo de navegação (se quiser setas)
 import { useContext, useEffect } from "react";
 import { api } from "../../../../service/api";
-import Loading from "../../Loading/Loading";
 import { SwiperStyled } from "./CardsMoviesSwiperStyle";
 import {
   MoviePopular,
@@ -19,7 +18,7 @@ const CardsMovieSwiper = ({
   movieList,
   paramsMovie,
 }: MoviesProps) => {
-  const { loading, setLoading } = useContext(CommonContext);
+  const { setLoading } = useContext(CommonContext);
 
   useEffect(() => {
     setLoading(true);
@@ -52,10 +51,7 @@ const CardsMovieSwiper = ({
       //   },
       // }}
     >
-      {loading ? (
-        <Loading />
-      ) : (
-        movieList.map((movie) => (
+      {movieList.map((movie) => (
           <SwiperSlide key={movie.id}>
             <Cards
               key={movie.id}
@@ -66,7 +62,7 @@ const CardsMovieSwiper = ({
             />
           </SwiperSlide>
         ))
-      )}
+      }
     </SwiperStyled>
   );
 };
