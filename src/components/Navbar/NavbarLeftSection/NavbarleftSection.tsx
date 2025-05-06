@@ -50,7 +50,7 @@ const NavbarleftSection = () => {
           >
             Séries
           </StyledLi>
-          
+
           <StyledLi
             navSelect={navSelect}
             id="favoritos"
@@ -58,7 +58,6 @@ const NavbarleftSection = () => {
           >
             Favoritos
           </StyledLi>
-          
         </ul>
       </ListNavegation>
     </LeftSection>

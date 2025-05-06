@@ -34,15 +34,34 @@ export const AreaCard = styled.div`
       transition: ease-in-out 0.5s;
     }
   }
+
+  @media (max-width: 768px) {
+    img {
+      width: 330px;
+    }
+
+    section::before {
+      width: 330px;
+    }
+
+    &:hover {
+      section::before {
+        width: 330px;
+      }
+    }
+  }
 `;
 
 export const AreaTitleRating = styled.div`
   bottom: 0;
   position: absolute;
-  padding: 10px;
-  padding-right: 15px;
+  /* padding: 10px; */
+  padding: 10px 8px;
+  /* padding-right: 15px; */
 
   p {
+    width: 270px;
+    word-break: break-word;
     color: white;
     font-family: var(--font-button);
   }

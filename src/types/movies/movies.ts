@@ -48,4 +48,6 @@ export interface MovieContextType {
     setMoviePopular: React.Dispatch<React.SetStateAction<MoviePopular[]>>;
     movieUpComing: MoviePopular[];
     setMovieUpComing: React.Dispatch<React.SetStateAction<MoviePopular[]>>; 
+    AllMovies: MoviePopular[];
+    setAllMovies: React.Dispatch<React.SetStateAction<MoviePopular[]>>; 
 }

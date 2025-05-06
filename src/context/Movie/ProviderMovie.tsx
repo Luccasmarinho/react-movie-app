@@ -10,6 +10,7 @@ const ProviderMovie = ({ children }: PropsChildren) => {
   const [movieTopRated, setMovieTopRated] = useState<MovieTopRated[]>([]);
   const [moviePopular, setMoviePopular] = useState<MoviePopular[]>([]);
   const [movieUpComing, setMovieUpComing] = useState<MoviePopular[]>([]);
+  const [AllMovies, setAllMovies] = useState<MoviePopular[]>([]);
 
   const values = {
     movieTopRated,
@@ -18,6 +19,8 @@ const ProviderMovie = ({ children }: PropsChildren) => {
     setMoviePopular,
     movieUpComing,
     setMovieUpComing,
+    AllMovies,
+    setAllMovies,
   };
   return (
     <MovieContext.Provider value={values}>{children}</MovieContext.Provider>
