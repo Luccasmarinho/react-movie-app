@@ -7,6 +7,7 @@ import { CommonContext } from "../../context/Common/CommonContext";
 // import { MoviesResponse, MovieTrailer } from "../../types/movies/movies";
 // import { api } from "../../service/api";
 // import { useState } from "react";
+import noImage from "../../assets/No_Image_Available.jpg";
 
 const Cards = ({ id, poster_path, title, name, vote_average }: CardsProps) => {
   const { loading } = useContext(CommonContext);
@@ -31,7 +32,11 @@ const Cards = ({ id, poster_path, title, name, vote_average }: CardsProps) => {
       ) : (
         <section>
           <img
-            src={`https://image.tmdb.org/t/p/original${poster_path}`}
+            src={
+              !poster_path
+                ? noImage
+                : `https://image.tmdb.org/t/p/original${poster_path}`
+            }
             alt={`Poster ${title || name}`}
           />
           <AreaTitleRating>

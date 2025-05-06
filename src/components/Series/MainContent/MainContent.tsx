@@ -1,16 +1,17 @@
 import { useContext } from "react";
+import { SeriesContext } from "../../../context/Series/SeriesContext";
 import SectionAllCards from "../../SectionAllCards/SectionAllCards";
-import { MovieContext } from "../../../context/Movie/MovieContext";
 
 const MainContent = () => {
-  const { AllMovies, setAllMovies } = useContext(MovieContext);
+  const { allSeries, setAllSeries } = useContext(SeriesContext);
+
   return (
     <main style={{ margin: "0 30px" }}>
       <SectionAllCards
-        title="Filmes"
-        setMovie={setAllMovies}
-        paramsMovie="/movie"
-        movieList={AllMovies}
+        title="Séries"
+        setMovie={setAllSeries}
+        paramsMovie="/tv"
+        movieList={allSeries}
       />
     </main>
   );

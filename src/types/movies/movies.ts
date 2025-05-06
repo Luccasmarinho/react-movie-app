@@ -2,7 +2,8 @@ import { ReactNode } from "react";
 
 export interface Movie {
     id: number;
-    title: string;
+    title?: string;
+    name?: string;
 }
 
 export interface MovieTopRated extends Movie {

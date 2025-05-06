@@ -43,13 +43,15 @@ const NavbarleftSection = () => {
             </StyledLi>
           </StyledLink>
 
-          <StyledLi
-            navSelect={navSelect}
-            id="series"
-            onClick={() => setNavSelect("series")}
-          >
-            Séries
-          </StyledLi>
+          <StyledLink to={"/series"}>
+            <StyledLi
+              navSelect={navSelect}
+              id="series"
+              onClick={() => setNavSelect("series")}
+            >
+              Séries
+            </StyledLi>
+          </StyledLink>
 
           <StyledLi
             navSelect={navSelect}

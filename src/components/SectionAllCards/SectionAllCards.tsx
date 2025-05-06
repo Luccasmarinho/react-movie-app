@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import Cards from "../../Cards/Cards";
+import Cards from "../Cards/Cards";
 import BasicPagination from "../BasicPagination/BasicPagination";
 import {
   Container,
@@ -7,18 +7,22 @@ import {
   Box,
   AreaCard,
   AreaPagination,
-} from "./SectionCardsMoviesStyle";
-import { api } from "../../../service/api";
+} from "./SectionAllCardsStyle";
+import { api } from "../../service/api";
 import {
   MoviePopular as AllMoviesResults,
   MoviesResponse,
-} from "../../../types/movies/movies";
-import { MovieContext } from "../../../context/Movie/MovieContext";
-import { CommonContext } from "../../../context/Common/CommonContext";
+  SectionCardsProps,
+} from "../../types/movies/movies";
+import { CommonContext } from "../../context/Common/CommonContext";
 import { useSearchParams } from "react-router-dom";
 
-const SectionCardsMovies = () => {
-  const { AllMovies, setAllMovies } = useContext(MovieContext);
+const SectionAllCards = ({
+  title,
+  setMovie,
+  movieList,
+  paramsMovie,
+}: SectionCardsProps) => {
   const { setLoading } = useContext(CommonContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || 1;
@@ -28,9 +32,9 @@ const SectionCardsMovies = () => {
     async function getAllMovies(): Promise<void> {
       try {
         const connection = await api.get<MoviesResponse<AllMoviesResults[]>>(
-          `/discover/movie?page=${page}`
+          `/discover/${paramsMovie}?page=${page}`
         );
-        setAllMovies(connection.data.results);
+        setMovie(connection.data.results);
         setLoading(false);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
@@ -48,17 +52,18 @@ const SectionCardsMovies = () => {
   return (
     <Container>
       <AreaTitle>
-        <h1>Filmes</h1>
+        <h1>{title}</h1>
       </AreaTitle>
       <Box>
         <AreaCard>
-          {AllMovies.map((movie) => (
+          {movieList.map((movie) => (
             <Cards
               key={movie.id}
               id={movie.id}
               poster_path={movie.poster_path}
               vote_average={movie.vote_average / 2}
               title={movie.title}
+              name={movie.name}
             />
           ))}
         </AreaCard>
@@ -70,4 +75,4 @@ const SectionCardsMovies = () => {
   );
 };
 
-export default SectionCardsMovies;
+export default SectionAllCards;

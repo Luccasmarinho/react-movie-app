@@ -2,7 +2,8 @@ import { ReactNode } from "react";
 
 export interface Series {
   id: number;
-  name: string;
+  title?: string;
+  name?: string;
   vote_average: number;
   poster_path: string;
 }
@@ -27,4 +28,6 @@ export interface SeriesContextType {
   setSeriesPopular: React.Dispatch<React.SetStateAction<Series[]>>;
   seriesTopRated: Series[];
   setSeriesTopRated:React.Dispatch<React.SetStateAction<Series[]>>;
+  allSeries: Series[];
+  setAllSeries:React.Dispatch<React.SetStateAction<Series[]>>
 }

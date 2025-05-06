@@ -1,9 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../pages/Home/Home";
 import Movies from "../pages/Movies/Movies";
-// import { useContext } from "react";
-// import { MovieContext } from "../context/Movie/MovieContext";
-// const { page } = useContext(MovieContext);
+import Series from "../pages/Series/Series";
 
 const RoutesApp = () => {
   return (
@@ -11,6 +9,7 @@ const RoutesApp = () => {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path={`/filmes`} element={<Movies />}></Route>
+        <Route path={`/series`} element={<Series />}></Route>
         <Route path="/*" element={<p>not found</p>}></Route>
       </Routes>
     </BrowserRouter>
