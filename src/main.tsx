@@ -2,12 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { GlobalStyle } from "./style/GlobalStyle";
 import ProviderWrapper from "./context/ProviderWrapper";
-import RoutesApp from "./Routes/RoutesApp";
+import RouterWrapper from "./Routes/RouterWrapper";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ProviderWrapper>
-      <RoutesApp />
+      <RouterWrapper />
       <GlobalStyle />
     </ProviderWrapper>
   </StrictMode>

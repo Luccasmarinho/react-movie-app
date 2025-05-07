@@ -8,10 +8,11 @@ import { CommonContext } from "../../context/Common/CommonContext";
 // import { api } from "../../service/api";
 // import { useState } from "react";
 import noImage from "../../assets/No_Image_Available.jpg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Cards = ({ id, poster_path, title, name, vote_average }: CardsProps) => {
   const { loading } = useContext(CommonContext);
+  const location = useLocation();
 
   // const [keyTrailer, setKeyTrailer] = useState<string | undefined>();
 
@@ -48,7 +49,10 @@ const Cards = ({ id, poster_path, title, name, vote_average }: CardsProps) => {
   // }
 
   return (
-    <Link to={`/details/${id}/${title || name}`}>
+    <Link
+      to={`/details/${id}/${title || name}`}
+      state={{ backgroundLocation: location }}
+    >
       <AreaCard key={id}>
         {loading ? (
           <SkeletonCards />

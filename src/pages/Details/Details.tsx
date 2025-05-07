@@ -1,8 +1,11 @@
+import ModalDetails from "../../components/ModalDetails/ModalDetails";
 
 const Details = () => {
   return (
-    <div>Details</div>
-  )
-}
+    <div>
+      <ModalDetails />
+    </div>
+  );
+};
 
-export default Details
+export default Details;
