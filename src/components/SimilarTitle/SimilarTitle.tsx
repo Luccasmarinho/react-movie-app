@@ -1,4 +1,3 @@
-import Cards from "../Cards/Cards";
 import { MoviePopular, MoviesResponse } from "../../types/movies/movies";
 import { useEffect, useState } from "react";
 import { api } from "../../service/api";
