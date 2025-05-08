@@ -27,7 +27,7 @@ const SimilarTitle = ({ id }: similarTitleProps) => {
       }
     }
     getSimilar();
-  }, []);
+  }, [id]);
 
   return (
     <Container>

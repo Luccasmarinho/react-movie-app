@@ -44,7 +44,7 @@ const ModalDetails = () => {
       }
     }
     getKeyVideo();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

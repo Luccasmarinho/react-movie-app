@@ -6,20 +6,21 @@ import CardActionArea from "@mui/material/CardActionArea";
 import AgeGroup from "../AgeGroup/AgeGroup";
 import imageNotAvailable from "../../assets/No_Image_Available.jpg";
 import { MovieTopRated as SimilarTitleType } from "../../types/movies/movies";
-// import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function CardSimilarTitle({
   backdrop_path,
   overview,
   title,
-//   name,
-//   id
+  name,
+  id
 }: SimilarTitleType) {
+    const location = useLocation();
   return (
-    // <Link
-    //   to={`/details/${id}/${title || name}`}
-    //   state={{ backgroundLocation: location }}
-    // >
+    <Link
+      to={`/details/${id}/${title || name}`}
+      state={{ backgroundLocation: location }}
+    >
       <Card
         sx={{
           width: 285,
