@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Swiper } from "swiper/react";
-// import Loading from "../Loading/Loading";
 
 export const StyledSwiper = styled(Swiper)`
   width: 100%;
@@ -43,31 +42,6 @@ export const Container = styled.div`
 `;
 
 export const AreaButton = styled.div`
-  display: flex;
-  gap: 15px;
-
-  button {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    padding: 10px 22px;
-    font-family: var(--font-button);
-    color: white;
-    border: 1px solid var(--color-main-red);
-    background-color: var(--color-main-red);
-    cursor: pointer;
-    border-radius: 5px;
-    transition: ease-in 0.3s;
-  }
-
-  button:hover {
-    box-shadow: 100px -1px 10px 10px inset black,
-      -100px 1px 10px 10px inset black;
-    padding: 10px 22px;
-  }
+  /* display: flex;
+  gap: 15px; */
 `;
-
-// export const LoadingStyle = styled(Loading)`
-//   background-color: blue;
-//   z-index: 100000000000000;
-// `;

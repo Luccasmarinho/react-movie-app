@@ -38,3 +38,7 @@ export interface CardsProps {
     name?: string;
     vote_average: number;
 }
+
+export interface VideoTrailerProps {
+    keyTrailer: string;
+}

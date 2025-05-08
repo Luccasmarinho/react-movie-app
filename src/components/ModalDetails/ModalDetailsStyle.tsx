@@ -5,7 +5,7 @@ export const ModalOverlay = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.75);
   display: flex;
   align-items: center;
@@ -18,9 +18,15 @@ export const ModalContent = styled.div`
   padding: 2rem;
   border-radius: 12px;
   width: 90%;
-  max-width: 600px;
+  max-width: 950px;
+  max-height: 90vh;
+  overflow-y: auto;
   color: white;
   position: relative;
+
+  h2 {
+    margin-bottom: 10px;
+  }
 `;
 
 export const CloseButton = styled.button`
@@ -33,3 +39,24 @@ export const CloseButton = styled.button`
   color: white;
   cursor: pointer;
 `;
+
+export const ContainerOverview = styled.div`
+  display: flex;
+
+  p,
+  strong {
+    font-family: var(--font-subtitle);
+    font-size: 15px;
+  }
+`;
+
+export const Box = styled.div`
+  width: 50%;
+  margin-top: 10px;
+`;
+
+export const Age = styled.div`
+  display: flex;
+  gap: 5px;
+`;
+export const Overview = styled.div``;

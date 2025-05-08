@@ -3,14 +3,13 @@ import "swiper/css"; // Importando o estilo base
 import "swiper/css/navigation"; // Se quiser navegação (setinhas)
 import { Navigation, Autoplay } from "swiper/modules"; // Importar o módulo de navegação (se quiser setas)
 import { StyledSwiper, Container, AreaButton } from "./SwiperLandingStyle";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
 import { useContext, useEffect } from "react";
 import { api } from "../../../../service/api";
 import Loading from "../../Loading/Loading";
 import { MoviesResponse, MovieTopRated } from "../../../../types/movies/movies";
 import { CommonContext } from "../../../../context/Common/CommonContext";
 import { MovieContext } from "../../../../context/Movie/MovieContext";
+import ButtonPlay from "../../ButtonPLay/ButtonPLay";
 
 const SwiperCarousel = () => {
   const { loading, setLoading } = useContext(CommonContext);
@@ -50,14 +49,7 @@ const SwiperCarousel = () => {
               <h1>{movie.title}</h1>
               <p>{movie.overview}</p>
               <AreaButton>
-                <button>
-                  <PlayArrowIcon />
-                  Assistir
-                </button>
-                <button>
-                  <InfoOutlineIcon />
-                  Mais informações
-                </button>
+                <ButtonPlay />
               </AreaButton>
             </Container>
             <img

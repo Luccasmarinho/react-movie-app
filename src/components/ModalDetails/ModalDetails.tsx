@@ -1,10 +1,53 @@
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { CloseButton, ModalContent, ModalOverlay } from "./ModalDetailsStyle";
+import { useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import {
+  CloseButton,
+  ModalContent,
+  ModalOverlay,
+  ContainerOverview,
+  Box,
+  Age,
+  Overview,
+} from "./ModalDetailsStyle";
 import CloseIcon from "@mui/icons-material/Close";
+import VideoTrailer from "../VideoTrailer/VideoTrailer";
+import { CommonContext } from "../../context/Common/CommonContext";
+import { api } from "../../service/api";
+import {
+  MovieTrailer,
+  MoviesResponse,
+} from "../../types/movies/movies";
+import AgeGroup from "../AgeGroup/AgeGroup";
+import SimilarTitle from "../SimilarTitle/SimilarTitle";
 
 const ModalDetails = () => {
   const navigate = useNavigate();
+  const { id, title } = useParams();
+
+  const [keyTrailer, setKeyTrailer] = useState<string>("");
+  const { setLoading } = useContext(CommonContext);
+
+  useEffect(() => {
+    setLoading(true);
+    async function getKeyVideo(): Promise<void> {
+      try {
+        const connection = await api.get<MoviesResponse<MovieTrailer[]>>(
+          `/movie/${id}/videos`,
+          {
+            params: {
+              language: "en-US",
+            },
+          }
+        );
+
+        setKeyTrailer(connection.data.results[0]?.key);
+        setLoading(false);
+      } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+      }
+    }
+    getKeyVideo();
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -20,8 +63,53 @@ const ModalDetails = () => {
         <CloseButton onClick={() => navigate(-1)}>
           <CloseIcon />
         </CloseButton>
-        <h2>Detalhes do Filme</h2>
-        <p>Conteúdo do filme aqui...</p>
+        <div>
+          <h2>{title}</h2>
+        </div>
+        <div>
+          <VideoTrailer keyTrailer={keyTrailer} />
+        </div>
+
+        <ContainerOverview>
+          <Box>
+            <Age>
+              <p>2021</p>
+              <AgeGroup />
+            </Age>
+            <Overview>
+              <p>
+                Uma viúva e um arqueólogo autodidata fazem uma descoberta
+                impressionante neste drama indicado ao BAFTA e considerado "uma
+                joia do cinema" pelo The Times of London.
+              </p>
+            </Overview>
+          </Box>
+
+          <Box>
+            <div>
+              <p>
+                <strong>Elenco</strong>: Matt Damon, Leonardo Di Caprio,
+                Alexandra Dadario
+              </p>
+            </div>
+            <div>
+              <p>
+                <strong>Gêneros</strong>:
+              </p>
+            </div>
+            <div>
+              <p>
+                <strong>Elenco</strong>:
+              </p>
+            </div>
+          </Box>
+        </ContainerOverview>
+        <div>
+          <h2>Títulos semelhantes</h2>
+          <div>
+            <SimilarTitle id={id} />
+          </div>
+        </div>
       </ModalContent>
     </ModalOverlay>
   );
