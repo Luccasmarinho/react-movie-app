@@ -1,23 +1,24 @@
-import { MoviePopular, MoviesResponse } from "../../types/movies/movies";
+import {
+  MoviesResponse,
+  MovieTopRated as SimilarTitleType,
+} from "../../types/movies/movies";
 import { useEffect, useState } from "react";
 import { api } from "../../service/api";
+import CardSimilarTitle from "../CardSimilarTitle/CardSimilarTitle";
+import { Container } from "./SimilarTitleStyle.tsx";
 
 interface similarTitleProps {
   id: string | undefined;
 }
+
 const SimilarTitle = ({ id }: similarTitleProps) => {
-  const [similarTitle, SetSimilarTitle] = useState<MoviePopular[]>([]);
+  const [similarTitle, SetSimilarTitle] = useState<SimilarTitleType[]>([]);
   useEffect(() => {
     // setLoading(true);
     async function getSimilar(): Promise<void> {
       try {
-        const connection = await api.get<MoviesResponse<MoviePopular[]>>(
-          `/movie/${id}/similar`,
-          {
-            params: {
-              language: "en-US",
-            },
-          }
+        const connection = await api.get<MoviesResponse<SimilarTitleType[]>>(
+          `/movie/${id}/similar`
         );
         SetSimilarTitle(connection.data.results);
         // setLoading(false);
@@ -29,14 +30,17 @@ const SimilarTitle = ({ id }: similarTitleProps) => {
   }, []);
 
   return (
-    <div>
-      {similarTitle.map((element) => (
-        <img
-          style={{ width: "280px" }}
-          src={`https://image.tmdb.org/t/p/original${element.poster_path}`}
-        ></img>
+    <Container>
+      {similarTitle.slice(0, 9).map((element) => (
+        <CardSimilarTitle
+          key={element.id}
+          id={element.id}
+          backdrop_path={element.backdrop_path}
+          overview={element.overview}
+          title={element.title}
+        />
       ))}
-    </div>
+    </Container>
   );
 };
 

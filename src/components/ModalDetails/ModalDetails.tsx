@@ -13,10 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import VideoTrailer from "../VideoTrailer/VideoTrailer";
 import { CommonContext } from "../../context/Common/CommonContext";
 import { api } from "../../service/api";
-import {
-  MovieTrailer,
-  MoviesResponse,
-} from "../../types/movies/movies";
+import { MovieTrailer, MoviesResponse } from "../../types/movies/movies";
 import AgeGroup from "../AgeGroup/AgeGroup";
 import SimilarTitle from "../SimilarTitle/SimilarTitle";
 

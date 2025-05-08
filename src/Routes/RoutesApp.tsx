@@ -13,6 +13,7 @@ const RoutesApp = () => {
         <Route path="/" element={<Home />} />
         <Route path="/filmes" element={<Movies />} />
         <Route path="/series" element={<Series />} />
+        <Route path="/details/:id/:title" element={<Details />} />
         <Route path="/*" element={<p>not found</p>} />
       </Routes>
 

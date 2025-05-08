@@ -4,49 +4,12 @@ import { CardsProps } from "../../types/common/common";
 import SkeletonCards from "../SkeletonCards/SkeletonCards";
 import { useContext } from "react";
 import { CommonContext } from "../../context/Common/CommonContext";
-// import { MoviesResponse, MovieTrailer } from "../../types/movies/movies";
-// import { api } from "../../service/api";
-// import { useState } from "react";
 import noImage from "../../assets/No_Image_Available.jpg";
 import { Link, useLocation } from "react-router-dom";
 
 const Cards = ({ id, poster_path, title, name, vote_average }: CardsProps) => {
   const { loading } = useContext(CommonContext);
   const location = useLocation();
-
-  // const [keyTrailer, setKeyTrailer] = useState<string | undefined>();
-
-  // useEffect(() => {
-  //   async function getMovieTrailerKey(movieId: number): Promise<void> {
-  //     try {
-  //       const connection = await api.get<MoviesResponse<MovieTrailer[]>>(
-  //         `/movie/${movieId}/videos`,
-  //         {
-  //           params: {
-  //             language: `en-US`,
-  //           },
-  //         }
-  //       );
-  //       console.log(connection);
-  //       setKeyTrailer(connection.data.results[0]?.key);
-  //     } catch (error) {
-  //       console.error("Erro ao buscar dados:", error);
-  //     }
-  //   }
-
-  //   getMovieTrailerKey(id);
-  // });
-
-  // async function getMovieTrailerKey(movieId: number): Promise<void> {
-  //   try {
-  //     const connection = await api.get<MoviesResponse<MovieTrailer[]>>(
-  //       `/movie/${movieId}/videos`
-  //     );
-  //     setKeyTrailer(connection.data.results[0]?.key);
-  //   } catch (error) {
-  //     console.error("Erro ao buscar dados:", error);
-  //   }
-  // }
 
   return (
     <Link
