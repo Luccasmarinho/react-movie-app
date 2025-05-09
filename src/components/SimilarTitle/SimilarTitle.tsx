@@ -11,8 +11,20 @@ interface similarTitleProps {
   id: string | undefined;
 }
 
+interface ReleaseDates {
+  certification: string;
+}
+
+interface MovieRelaseDates {
+  iso_3166_1: string;
+  release_dates: ReleaseDates[];
+}
+
 const SimilarTitle = ({ id }: similarTitleProps) => {
   const [similarTitle, SetSimilarTitle] = useState<SimilarTitleType[]>([]);
+  // const [ageGroup, setAgeGroup] = useState<string | undefined>("");
+  const [ageGroups, setAgeGroups] = useState<Record<number, string>>({});
+
   useEffect(() => {
     // setLoading(true);
     async function getSimilar(): Promise<void> {
@@ -29,6 +41,45 @@ const SimilarTitle = ({ id }: similarTitleProps) => {
     getSimilar();
   }, [id]);
 
+  useEffect(() => {
+    async function getReleaseDate(): Promise<void> {
+      try {
+        const results = await Promise.all(
+          similarTitle.map(async (movie) => {
+            const connection = await api.get<
+              MoviesResponse<MovieRelaseDates[]>
+            >(`/movie/${movie.id}/release_dates`);
+
+            const findAge = connection.data.results.find(
+              (e) => e.iso_3166_1 === "BR"
+            );
+
+            const certification =
+              findAge?.release_dates[0]?.certification ||
+              findAge?.release_dates[1]?.certification;
+
+            return { id: movie.id, certification };
+          })
+        );
+
+        const grouped = results.reduce<Record<number, string>>((acc, cur) => {
+          if (cur.certification) {
+            acc[cur.id] = cur.certification;
+          }
+          return acc;
+        }, {});
+
+        setAgeGroups(grouped);
+      } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+      }
+    }
+
+    if (similarTitle.length > 0) {
+      getReleaseDate();
+    }
+  }, [similarTitle]);
+
   return (
     <Container>
       {similarTitle.slice(0, 9).map((element) => (
@@ -38,6 +89,7 @@ const SimilarTitle = ({ id }: similarTitleProps) => {
           backdrop_path={element.backdrop_path}
           overview={element.overview}
           title={element.title}
+          age={ageGroups[element.id]} 
         />
       ))}
     </Container>

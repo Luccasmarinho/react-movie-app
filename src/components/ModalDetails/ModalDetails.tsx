@@ -17,12 +17,22 @@ import { MovieTrailer, MoviesResponse } from "../../types/movies/movies";
 import AgeGroup from "../AgeGroup/AgeGroup";
 import SimilarTitle from "../SimilarTitle/SimilarTitle";
 
+interface ReleaseDates {
+  certification: string;
+}
+
+interface MovieRelaseDates {
+  iso_3166_1: string;
+  release_dates: ReleaseDates[];
+}
+
 const ModalDetails = () => {
   const navigate = useNavigate();
   const { id, title } = useParams();
 
   const [keyTrailer, setKeyTrailer] = useState<string>("");
   const { setLoading } = useContext(CommonContext);
+  const [ageGroup, setAgeGroup] = useState<string | undefined>("");
 
   useEffect(() => {
     setLoading(true);
@@ -44,6 +54,27 @@ const ModalDetails = () => {
       }
     }
     getKeyVideo();
+  }, [id]);
+
+  useEffect(() => {
+    async function getReleaseDate(): Promise<void> {
+      try {
+        const connection = await api.get<MoviesResponse<MovieRelaseDates[]>>(
+          `/movie/${id}/release_dates`
+        );
+        const findAge = connection.data.results.find(
+          (e) => e.iso_3166_1 == "BR"
+        );
+        setAgeGroup(
+          findAge?.release_dates[0]?.certification ||
+            findAge?.release_dates[1]?.certification
+        );
+      } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+      }
+    }
+
+    getReleaseDate();
   }, [id]);
 
   useEffect(() => {
@@ -71,7 +102,7 @@ const ModalDetails = () => {
           <Box>
             <Age>
               <p>2021</p>
-              <AgeGroup />
+              <AgeGroup age={ageGroup} />
             </Age>
             <Overview>
               <p>

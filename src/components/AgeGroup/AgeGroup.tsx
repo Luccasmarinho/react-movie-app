@@ -1,9 +1,13 @@
-import {Container} from "./AgeGroupStyle"
+import { Container } from "./AgeGroupStyle";
 
-const AgeGroup = () => {
+interface MovieAgeGroupsProps {
+  age: string | undefined;
+}
+
+const AgeGroup = ({ age }: MovieAgeGroupsProps) => {
   return (
-    <Container>
-      <p>12</p>
+    <Container age={age}>
+      <p>{age}</p>
     </Container>
   );
 };

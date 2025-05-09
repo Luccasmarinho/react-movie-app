@@ -8,14 +8,19 @@ import imageNotAvailable from "../../assets/No_Image_Available.jpg";
 import { MovieTopRated as SimilarTitleType } from "../../types/movies/movies";
 import { Link, useLocation } from "react-router-dom";
 
+interface MovieAgeGroupsProps extends SimilarTitleType {
+  age: string | undefined;
+}
+
 export default function CardSimilarTitle({
   backdrop_path,
   overview,
   title,
   name,
-  id
-}: SimilarTitleType) {
-    const location = useLocation();
+  id,
+  age,
+}: MovieAgeGroupsProps) {
+  const location = useLocation();
   return (
     <Link
       to={`/details/${id}/${title || name}`}
@@ -62,7 +67,7 @@ export default function CardSimilarTitle({
                 marginBottom: "10px",
               }}
             >
-              <AgeGroup />
+              <AgeGroup age={age} />
               <Typography variant="body2" sx={{ color: "white" }}>
                 2025
               </Typography>
@@ -84,6 +89,6 @@ export default function CardSimilarTitle({
           </CardContent>
         </CardActionArea>
       </Card>
-    // </Link>
+    </Link>
   );
 }
