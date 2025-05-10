@@ -10,6 +10,7 @@ import { Link, useLocation } from "react-router-dom";
 
 interface MovieAgeGroupsProps extends SimilarTitleType {
   age: string | undefined;
+  date_release: string;
 }
 
 export default function CardSimilarTitle({
@@ -19,6 +20,7 @@ export default function CardSimilarTitle({
   name,
   id,
   age,
+  date_release,
 }: MovieAgeGroupsProps) {
   const location = useLocation();
   return (
@@ -56,7 +58,7 @@ export default function CardSimilarTitle({
 
           <CardContent sx={{ flex: 1, width: "100%" }}>
             <Typography gutterBottom variant="h6" component="div" noWrap>
-              {title}
+              {title || name}
             </Typography>
 
             <div
@@ -69,7 +71,7 @@ export default function CardSimilarTitle({
             >
               <AgeGroup age={age} />
               <Typography variant="body2" sx={{ color: "white" }}>
-                2025
+                {date_release}
               </Typography>
             </div>
 

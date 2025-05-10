@@ -10,15 +10,15 @@ export const Container = styled.div.withConfig({
   background-color: ${({ age }) =>
     age == "L"
       ? "green"
-      : age == "10"
+      : age?.includes("10")
       ? "#09CEFF"
-      : age == "12"
-      ? "yellow"
-      : age == "14"
+      : age?.includes("12")
+      ? "#FECE1C"
+      : age?.includes("14")
       ? "orange"
-      : age == "16"
+      : age?.includes("16")
       ? "red"
-      : age == "18"
+      : age?.includes("18")
       ? "black"
       : "transparent"};
   width: 30px;

@@ -42,11 +42,12 @@ export const CloseButton = styled.button`
 
 export const ContainerOverview = styled.div`
   display: flex;
+  margin-bottom: 20px;
 
   p,
   strong {
     font-family: var(--font-subtitle);
-    font-size: 15px;
+    font-size: 13.5px;
   }
 `;
 

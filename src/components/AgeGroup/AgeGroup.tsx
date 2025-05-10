@@ -7,7 +7,7 @@ interface MovieAgeGroupsProps {
 const AgeGroup = ({ age }: MovieAgeGroupsProps) => {
   return (
     <Container age={age}>
-      <p>{age}</p>
+      <p>{age?.replace("e", "")}</p>
     </Container>
   );
 };

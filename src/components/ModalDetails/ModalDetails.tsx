@@ -26,6 +26,20 @@ interface MovieRelaseDates {
   release_dates: ReleaseDates[];
 }
 
+// interface MoviesDetailsData {
+//   data: MoviesDetails;
+// }
+
+interface MoviesDetails {
+  overview: string;
+  release_date: string;
+  genres: GenresMovies[];
+}
+
+interface GenresMovies {
+  name: string;
+}
+
 const ModalDetails = () => {
   const navigate = useNavigate();
   const { id, title } = useParams();
@@ -33,6 +47,8 @@ const ModalDetails = () => {
   const [keyTrailer, setKeyTrailer] = useState<string>("");
   const { setLoading } = useContext(CommonContext);
   const [ageGroup, setAgeGroup] = useState<string | undefined>("");
+  const [overviews, setOverViews] = useState<string>("");
+  const [dateRelease, setDateRelease] = useState<string>("");
 
   useEffect(() => {
     setLoading(true);
@@ -78,6 +94,20 @@ const ModalDetails = () => {
   }, [id]);
 
   useEffect(() => {
+    async function getMovieDetails() {
+      try {
+        const connection = await api.get<MoviesDetails>(`/movie/${id}`);
+        setOverViews(connection.data.overview);
+        setDateRelease(connection.data.release_date);
+      } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+      }
+    }
+
+    getMovieDetails();
+  }, [id]);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") navigate(-1);
     };
@@ -101,15 +131,11 @@ const ModalDetails = () => {
         <ContainerOverview>
           <Box>
             <Age>
-              <p>2021</p>
+              <p>{dateRelease.slice(0, 4)}</p>
               <AgeGroup age={ageGroup} />
             </Age>
             <Overview>
-              <p>
-                Uma viúva e um arqueólogo autodidata fazem uma descoberta
-                impressionante neste drama indicado ao BAFTA e considerado "uma
-                joia do cinema" pelo The Times of London.
-              </p>
+              <p>{overviews}</p>
             </Overview>
           </Box>
 

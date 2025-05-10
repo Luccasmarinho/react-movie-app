@@ -20,10 +20,15 @@ interface MovieRelaseDates {
   release_dates: ReleaseDates[];
 }
 
+interface MoviesDetails {
+  release_date: string;
+}
+
 const SimilarTitle = ({ id }: similarTitleProps) => {
   const [similarTitle, SetSimilarTitle] = useState<SimilarTitleType[]>([]);
   // const [ageGroup, setAgeGroup] = useState<string | undefined>("");
   const [ageGroups, setAgeGroups] = useState<Record<number, string>>({});
+  const [dateRelease, setDateRelease] = useState<Record<number, string>>([]);
 
   useEffect(() => {
     // setLoading(true);
@@ -42,7 +47,7 @@ const SimilarTitle = ({ id }: similarTitleProps) => {
   }, [id]);
 
   useEffect(() => {
-    async function getReleaseDate(): Promise<void> {
+    async function getCertification(): Promise<void> {
       try {
         const results = await Promise.all(
           similarTitle.map(async (movie) => {
@@ -68,7 +73,6 @@ const SimilarTitle = ({ id }: similarTitleProps) => {
           }
           return acc;
         }, {});
-
         setAgeGroups(grouped);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
@@ -76,8 +80,38 @@ const SimilarTitle = ({ id }: similarTitleProps) => {
     }
 
     if (similarTitle.length > 0) {
-      getReleaseDate();
+      getCertification();
     }
+  }, [similarTitle]);
+
+  useEffect(() => {
+    async function getMovieReleaseDate(): Promise<void> {
+      if (!similarTitle.length) return;
+      try {
+        const results = await Promise.all(
+          similarTitle.map(async (movie) => {
+            const connection = await api.get<MoviesDetails>(
+              `/movie/${movie.id}`
+            );
+            return {
+              id: movie.id,
+              release_date: connection.data.release_date.slice(0, 4),
+            };
+          })
+        );
+
+        const grouped = results.reduce<Record<number, string>>((acc, cur) => {
+          acc[cur.id] = cur.release_date;
+          return acc;
+        }, {});
+        
+        setDateRelease(grouped);
+      } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+      }
+    }
+
+    getMovieReleaseDate();
   }, [similarTitle]);
 
   return (
@@ -88,8 +122,10 @@ const SimilarTitle = ({ id }: similarTitleProps) => {
           id={element.id}
           backdrop_path={element.backdrop_path}
           overview={element.overview}
+          name={element.name}
           title={element.title}
-          age={ageGroups[element.id]} 
+          age={ageGroups[element.id]}
+          date_release={dateRelease[element.id]}
         />
       ))}
     </Container>
