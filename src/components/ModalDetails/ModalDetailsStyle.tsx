@@ -49,6 +49,10 @@ export const ContainerOverview = styled.div`
     font-family: var(--font-subtitle);
     font-size: 13.5px;
   }
+
+  strong {
+    color: #5A5A5A;
+  }
 `;
 
 export const Box = styled.div`

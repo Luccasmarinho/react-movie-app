@@ -40,6 +40,15 @@ interface GenresMovies {
   name: string;
 }
 
+interface CreditsMovie {
+  cast: CreditsMovie[];
+  crew: CreditsMovie[];
+}
+
+interface CreditsMovie {
+  name: string;
+}
+
 const ModalDetails = () => {
   const navigate = useNavigate();
   const { id, title } = useParams();
@@ -49,6 +58,9 @@ const ModalDetails = () => {
   const [ageGroup, setAgeGroup] = useState<string | undefined>("");
   const [overviews, setOverViews] = useState<string>("");
   const [dateRelease, setDateRelease] = useState<string>("");
+  const [cast, setCast] = useState<string[]>([]);
+  const [crew, setCrew] = useState<string[]>([]);
+  const [genres, setGenres] = useState<string[]>([]);
 
   useEffect(() => {
     setLoading(true);
@@ -94,9 +106,11 @@ const ModalDetails = () => {
   }, [id]);
 
   useEffect(() => {
-    async function getMovieDetails() {
+    async function getMovieDetails(): Promise<void> {
       try {
         const connection = await api.get<MoviesDetails>(`/movie/${id}`);
+        const genresArray = connection.data.genres.map((g) => g.name);
+        setGenres(genresArray);
         setOverViews(connection.data.overview);
         setDateRelease(connection.data.release_date);
       } catch (error) {
@@ -105,6 +119,33 @@ const ModalDetails = () => {
     }
 
     getMovieDetails();
+
+    return () => {
+      setGenres([]);
+    };
+  }, [id]);
+
+  useEffect(() => {
+    async function getCredits(): Promise<void> {
+      try {
+        const connection = await api.get<CreditsMovie>(`/movie/${id}/credits`);
+
+        const castArray = connection.data.cast.map((c) => c.name);
+        setCast(castArray);
+
+        const crewArray = connection.data.crew.map((c) => c.name);
+        setCrew(crewArray);
+      } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+      }
+    }
+
+    getCredits();
+
+    return () => {
+      setCast([]);
+      setCrew([]);
+    };
   }, [id]);
 
   useEffect(() => {
@@ -142,18 +183,17 @@ const ModalDetails = () => {
           <Box>
             <div>
               <p>
-                <strong>Elenco</strong>: Matt Damon, Leonardo Di Caprio,
-                Alexandra Dadario
+                <strong>Elenco: </strong> {cast.slice(0, 5).join(", ")}.
               </p>
             </div>
             <div>
               <p>
-                <strong>Gêneros</strong>:
+                <strong>Direção: </strong> {crew.slice(0, 5).join(", ")}.
               </p>
             </div>
             <div>
               <p>
-                <strong>Elenco</strong>:
+                <strong>Gêneros</strong>: {genres.join(", ")}.
               </p>
             </div>
           </Box>
