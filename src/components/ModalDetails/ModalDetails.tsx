@@ -24,6 +24,7 @@ interface ReleaseDates {
 interface MovieRelaseDates {
   iso_3166_1: string;
   release_dates: ReleaseDates[];
+  rating: string;
 }
 
 // interface MoviesDetailsData {
@@ -34,6 +35,7 @@ interface MoviesDetails {
   overview: string;
   release_date: string;
   genres: GenresMovies[];
+  first_air_date: string;
 }
 
 interface GenresMovies {
@@ -49,6 +51,11 @@ interface CreditsMovie {
   name: string;
 }
 
+interface MediaType {
+  id: number;
+  media_type: string;
+}
+
 const ModalDetails = () => {
   const navigate = useNavigate();
   const { id, title } = useParams();
@@ -61,13 +68,32 @@ const ModalDetails = () => {
   const [cast, setCast] = useState<string[]>([]);
   const [crew, setCrew] = useState<string[]>([]);
   const [genres, setGenres] = useState<string[]>([]);
+  const [mediaType, setMediaType] = useState<string | undefined>("");
 
   useEffect(() => {
+    async function getMediaType() {
+      try {
+        const connection = await api.get<MoviesResponse<MediaType[]>>(
+          `/search/multi?query=${title}`
+        );
+        const findMediaType = await connection.data.results.find(
+          (e) => e.id == Number(id)
+        );
+        setMediaType(findMediaType?.media_type);
+      } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+      }
+    }
+    getMediaType();
+  }, [id]);
+
+  useEffect(() => {
+    if (!mediaType) return;
     setLoading(true);
     async function getKeyVideo(): Promise<void> {
       try {
         const connection = await api.get<MoviesResponse<MovieTrailer[]>>(
-          `/movie/${id}/videos`,
+          `/${mediaType}/${id}/videos`,
           {
             params: {
               language: "en-US",
@@ -82,37 +108,50 @@ const ModalDetails = () => {
       }
     }
     getKeyVideo();
-  }, [id]);
+  }, [id, mediaType]);
 
   useEffect(() => {
+    if (!mediaType) return;
     async function getReleaseDate(): Promise<void> {
       try {
         const connection = await api.get<MoviesResponse<MovieRelaseDates[]>>(
-          `/movie/${id}/release_dates`
+          `/${mediaType}/${id}/${
+            mediaType == "movie" ? "release_dates" : "content_ratings"
+          }`
         );
         const findAge = connection.data.results.find(
           (e) => e.iso_3166_1 == "BR"
         );
-        setAgeGroup(
-          findAge?.release_dates[0]?.certification ||
-            findAge?.release_dates[1]?.certification
-        );
+
+        if (mediaType == "movie") {
+          setAgeGroup(
+            findAge?.release_dates[0]?.certification ||
+              findAge?.release_dates[1]?.certification
+          );
+        } else {
+          setAgeGroup(findAge?.rating);
+        }
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       }
     }
 
     getReleaseDate();
-  }, [id]);
+  }, [id, mediaType]);
 
   useEffect(() => {
+    if (!mediaType) return;
     async function getMovieDetails(): Promise<void> {
       try {
-        const connection = await api.get<MoviesDetails>(`/movie/${id}`);
+        const connection = await api.get<MoviesDetails>(`/${mediaType}/${id}`);
         const genresArray = connection.data.genres.map((g) => g.name);
         setGenres(genresArray);
         setOverViews(connection.data.overview);
-        setDateRelease(connection.data.release_date);
+        if (mediaType == "movie") {
+          setDateRelease(connection.data.release_date);
+        } else {
+          setDateRelease(connection.data.first_air_date);
+        }
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       }
@@ -123,12 +162,14 @@ const ModalDetails = () => {
     return () => {
       setGenres([]);
     };
-  }, [id]);
+  }, [id, mediaType]);
 
   useEffect(() => {
+    if (!mediaType) return;
+
     async function getCredits(): Promise<void> {
       try {
-        const connection = await api.get<CreditsMovie>(`/movie/${id}/credits`);
+        const connection = await api.get<CreditsMovie>(`/${mediaType}/${id}/credits`);
 
         const castArray = connection.data.cast.map((c) => c.name);
         setCast(castArray);
@@ -146,7 +187,7 @@ const ModalDetails = () => {
       setCast([]);
       setCrew([]);
     };
-  }, [id]);
+  }, [id, mediaType]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
