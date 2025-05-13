@@ -3,7 +3,9 @@ import { CommonContext } from "./CommonContext";
 import { PropsChildren } from "../../types/common/common";
 
 const ProviderCommon = ({ children }: PropsChildren) => {
-  const [navSelect, setNavSelect] = useState<string>("home");
+  const [navSelect, setNavSelect] = useState<string>((): string => {
+    return sessionStorage.getItem("s") || "home";
+  });
   const [loading, setLoading] = useState<boolean>(false);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [scrollMove, setScrollMove] = useState<boolean>(false);

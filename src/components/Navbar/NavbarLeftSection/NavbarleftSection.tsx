@@ -1,4 +1,3 @@
-// import React from "react";
 import {
   LeftSection,
   AreaTitleImg,
@@ -9,6 +8,7 @@ import {
 import image from "../../../assets/popcorn.webp";
 import { useContext } from "react";
 import { CommonContext } from "../../../context/Common/CommonContext";
+import { handleSession } from "../../../utils/utils"
 
 const NavbarleftSection = () => {
   const { navSelect, setNavSelect } = useContext(CommonContext);
@@ -27,7 +27,7 @@ const NavbarleftSection = () => {
             <StyledLi
               navSelect={navSelect}
               id="home"
-              onClick={() => setNavSelect("home")}
+              onClick={() => handleSession("home", setNavSelect)}
             >
               Home
             </StyledLi>
@@ -37,7 +37,7 @@ const NavbarleftSection = () => {
             <StyledLi
               navSelect={navSelect}
               id="filmes"
-              onClick={() => setNavSelect("filmes")}
+              onClick={() => handleSession("filmes", setNavSelect)}
             >
               Filmes
             </StyledLi>
@@ -47,7 +47,7 @@ const NavbarleftSection = () => {
             <StyledLi
               navSelect={navSelect}
               id="series"
-              onClick={() => setNavSelect("series")}
+              onClick={() => handleSession("series", setNavSelect)}
             >
               Séries
             </StyledLi>
@@ -56,7 +56,7 @@ const NavbarleftSection = () => {
           <StyledLi
             navSelect={navSelect}
             id="favoritos"
-            onClick={() => setNavSelect("favoritos")}
+            onClick={() => handleSession("favoritos", setNavSelect)}
           >
             Favoritos
           </StyledLi>
