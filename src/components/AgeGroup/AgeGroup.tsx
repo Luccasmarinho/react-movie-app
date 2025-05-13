@@ -1,8 +1,5 @@
 import { Container } from "./AgeGroupStyle";
-
-interface MovieAgeGroupsProps {
-  age: string | undefined;
-}
+import {MovieAgeGroupsProps} from "../../types/common/common"
 
 const AgeGroup = ({ age }: MovieAgeGroupsProps) => {
   return (

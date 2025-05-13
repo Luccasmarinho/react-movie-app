@@ -1,8 +1,5 @@
 import styled from "styled-components";
-
-interface MovieAgeGroupsProps {
-  age: string | undefined;
-}
+import {MovieAgeGroupsProps} from "../../types/common/common"
 
 export const Container = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== "age",

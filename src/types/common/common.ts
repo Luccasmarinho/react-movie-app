@@ -42,3 +42,7 @@ export interface CardsProps {
 export interface VideoTrailerProps {
     keyTrailer: string;
 }
+
+export interface MovieAgeGroupsProps {
+    age: string | undefined;
+}
