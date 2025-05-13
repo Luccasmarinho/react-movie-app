@@ -6,9 +6,9 @@ import { useContext } from "react";
 import { CommonContext } from "../../context/Common/CommonContext";
 import noImage from "../../assets/No_Image_Available.jpg";
 import { Link, useLocation } from "react-router-dom";
-
+import { handleSession } from "../../utils/utils";
 const Cards = ({ id, poster_path, title, name, vote_average }: CardsProps) => {
-  const { loading } = useContext(CommonContext);
+  const { loading, setPath } = useContext(CommonContext);
   const location = useLocation();
 
   return (
@@ -16,7 +16,10 @@ const Cards = ({ id, poster_path, title, name, vote_average }: CardsProps) => {
       to={`/details/${id}/${title || name}`}
       state={{ backgroundLocation: location }}
     >
-      <AreaCard key={id}>
+      <AreaCard
+        key={id}
+        onClick={() => handleSession("s", location.pathname, setPath)}
+      >
         {loading ? (
           <SkeletonCards />
         ) : (

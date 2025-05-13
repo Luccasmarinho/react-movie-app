@@ -61,7 +61,7 @@ const ModalDetails = () => {
   const { id, title } = useParams();
 
   const [keyTrailer, setKeyTrailer] = useState<string>("");
-  const { setLoading } = useContext(CommonContext);
+  const { setLoading, path } = useContext(CommonContext);
   const [ageGroup, setAgeGroup] = useState<string | undefined>("");
   const [overviews, setOverViews] = useState<string>("");
   const [dateRelease, setDateRelease] = useState<string>("");
@@ -169,7 +169,9 @@ const ModalDetails = () => {
 
     async function getCredits(): Promise<void> {
       try {
-        const connection = await api.get<CreditsMovie>(`/${mediaType}/${id}/credits`);
+        const connection = await api.get<CreditsMovie>(
+          `/${mediaType}/${id}/credits`
+        );
 
         const castArray = connection.data.cast.map((c) => c.name);
         setCast(castArray);
@@ -191,16 +193,16 @@ const ModalDetails = () => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") navigate(-1);
+      if (e.key === "Escape") navigate(path);
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [navigate]);
 
   return (
-    <ModalOverlay onClick={() => navigate(-1)}>
+    <ModalOverlay onClick={() => navigate(path)}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        <CloseButton onClick={() => navigate(-1)}>
+        <CloseButton onClick={() => navigate(path)}>
           <CloseIcon />
         </CloseButton>
         <div>

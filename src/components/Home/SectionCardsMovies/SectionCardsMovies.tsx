@@ -21,7 +21,7 @@ const SectionCardsMovies = ({
         <AreaTitle>
           <h1>{title}</h1>
           <Link to={"/filmes"}>
-            <button onClick={() => handleSession("filmes", setNavSelect)}>
+            <button onClick={() => handleSession("n", "filmes", setNavSelect)}>
               Ver todos
               <KeyboardDoubleArrowRightIcon fontSize="small" />
             </button>

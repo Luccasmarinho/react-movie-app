@@ -3,7 +3,7 @@ export function handleScroll(setScroll: React.Dispatch<React.SetStateAction<bool
     scroll > 50 ? setScroll(true) : setScroll(false);
 }
 
-export function handleSession(navSelectValue: string, setNav: React.Dispatch<React.SetStateAction<string>>) {
-    sessionStorage.setItem("s", navSelectValue);
+export function handleSession(keySession: string, navSelectValue: string, setNav: React.Dispatch<React.SetStateAction<string>>) {
+    sessionStorage.setItem(keySession, navSelectValue);
     setNav(navSelectValue);
 }

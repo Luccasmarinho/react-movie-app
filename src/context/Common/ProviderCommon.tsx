@@ -4,11 +4,14 @@ import { PropsChildren } from "../../types/common/common";
 
 const ProviderCommon = ({ children }: PropsChildren) => {
   const [navSelect, setNavSelect] = useState<string>((): string => {
-    return sessionStorage.getItem("s") || "home";
+    return sessionStorage.getItem("n") || "home";
   });
   const [loading, setLoading] = useState<boolean>(false);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [scrollMove, setScrollMove] = useState<boolean>(false);
+  const [path, setPath] = useState<string>((): string => {
+    return sessionStorage.getItem("s") || "/"
+  });
 
   const values = {
     navSelect,
@@ -19,6 +22,8 @@ const ProviderCommon = ({ children }: PropsChildren) => {
     setIsClicked,
     scrollMove,
     setScrollMove,
+    path,
+    setPath
   };
 
   return (

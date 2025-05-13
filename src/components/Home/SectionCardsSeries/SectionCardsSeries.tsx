@@ -15,7 +15,7 @@ const SectionCards = ({ title, setSerie, serieList, paramsSerie }: CardsSeriesPr
         <AreaTitle>
           <h1>{title}</h1>
           <Link to={"/series"}>
-            <button onClick={() => handleSession("series", setNavSelect)}>
+            <button onClick={() => handleSession("n", "series", setNavSelect)}>
               Ver todos
               <KeyboardDoubleArrowRightIcon fontSize="small" />
             </button>

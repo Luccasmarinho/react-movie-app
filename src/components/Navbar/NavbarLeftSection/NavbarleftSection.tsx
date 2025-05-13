@@ -27,7 +27,7 @@ const NavbarleftSection = () => {
             <StyledLi
               navSelect={navSelect}
               id="home"
-              onClick={() => handleSession("home", setNavSelect)}
+              onClick={() => handleSession("n", "home", setNavSelect)}
             >
               Home
             </StyledLi>
@@ -37,7 +37,7 @@ const NavbarleftSection = () => {
             <StyledLi
               navSelect={navSelect}
               id="filmes"
-              onClick={() => handleSession("filmes", setNavSelect)}
+              onClick={() => handleSession("n", "filmes", setNavSelect)}
             >
               Filmes
             </StyledLi>
@@ -47,7 +47,7 @@ const NavbarleftSection = () => {
             <StyledLi
               navSelect={navSelect}
               id="series"
-              onClick={() => handleSession("series", setNavSelect)}
+              onClick={() => handleSession("n", "series", setNavSelect)}
             >
               Séries
             </StyledLi>
@@ -56,7 +56,7 @@ const NavbarleftSection = () => {
           <StyledLi
             navSelect={navSelect}
             id="favoritos"
-            onClick={() => handleSession("favoritos", setNavSelect)}
+            onClick={() => handleSession("n", "favoritos", setNavSelect)}
           >
             Favoritos
           </StyledLi>

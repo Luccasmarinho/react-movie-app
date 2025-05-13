@@ -29,6 +29,8 @@ export interface CommonContextType {
     setIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
     scrollMove: boolean;
     setScrollMove: React.Dispatch<React.SetStateAction<boolean>>;
+    path: string;
+    setPath: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface CardsProps {

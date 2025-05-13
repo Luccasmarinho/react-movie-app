@@ -6,10 +6,12 @@ import { useEffect } from "react";
 const Home = () => {
   useEffect(() => {
     function createSession() {
-      sessionStorage.setItem("s", "home");
+      sessionStorage.setItem("n", "home");
+      sessionStorage.setItem("s", "/");
     }
     createSession();
   }, []);
+
   return (
     <div>
       <Navbar />
