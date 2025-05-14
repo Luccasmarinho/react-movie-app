@@ -9,6 +9,7 @@ import { Container } from "./SimilarTitleStyle.tsx";
 
 interface similarTitleProps {
   id: string | undefined;
+  mediaType: string | undefined;
 }
 
 interface ReleaseDates {
@@ -18,24 +19,26 @@ interface ReleaseDates {
 interface MovieRelaseDates {
   iso_3166_1: string;
   release_dates: ReleaseDates[];
+  rating: string;
 }
 
 interface MoviesDetails {
   release_date: string;
+  first_air_date: string;
 }
 
-const SimilarTitle = ({ id }: similarTitleProps) => {
+const SimilarTitle = ({ id, mediaType }: similarTitleProps) => {
   const [similarTitle, SetSimilarTitle] = useState<SimilarTitleType[]>([]);
-  // const [ageGroup, setAgeGroup] = useState<string | undefined>("");
   const [ageGroups, setAgeGroups] = useState<Record<number, string>>({});
   const [dateRelease, setDateRelease] = useState<Record<number, string>>([]);
 
   useEffect(() => {
+    if (!mediaType) return;
     // setLoading(true);
     async function getSimilar(): Promise<void> {
       try {
         const connection = await api.get<MoviesResponse<SimilarTitleType[]>>(
-          `/movie/${id}/similar`
+          `/${mediaType}/${id}/similar`
         );
         SetSimilarTitle(connection.data.results);
         // setLoading(false);
@@ -44,24 +47,35 @@ const SimilarTitle = ({ id }: similarTitleProps) => {
       }
     }
     getSimilar();
-  }, [id]);
+  }, [id, mediaType]);
 
   useEffect(() => {
+    if (!mediaType) return;
+
     async function getCertification(): Promise<void> {
       try {
         const results = await Promise.all(
           similarTitle.map(async (movie) => {
             const connection = await api.get<
               MoviesResponse<MovieRelaseDates[]>
-            >(`/movie/${movie.id}/release_dates`);
+            >(
+              `/${mediaType}/${movie.id}/${
+                mediaType == "movie" ? "release_dates" : "content_ratings"
+              }`
+            );
 
             const findAge = connection.data.results.find(
               (e) => e.iso_3166_1 === "BR"
             );
 
-            const certification =
-              findAge?.release_dates[0]?.certification ||
-              findAge?.release_dates[1]?.certification;
+            let certification;
+            if (mediaType == "movie") {
+              certification =
+                findAge?.release_dates[0]?.certification ||
+                findAge?.release_dates[1]?.certification;
+            } else {
+              certification = findAge?.rating;
+            }
 
             return { id: movie.id, certification };
           })
@@ -82,21 +96,27 @@ const SimilarTitle = ({ id }: similarTitleProps) => {
     if (similarTitle.length > 0) {
       getCertification();
     }
-  }, [similarTitle]);
+  }, [similarTitle, mediaType]);
 
   useEffect(() => {
     async function getMovieReleaseDate(): Promise<void> {
-      if (!similarTitle.length) return;
+      if (!similarTitle.length && !mediaType) return;
       try {
         const results = await Promise.all(
           similarTitle.map(async (movie) => {
             const connection = await api.get<MoviesDetails>(
-              `/movie/${movie.id}`
+              `/${mediaType}/${movie.id}`
             );
-            return {
-              id: movie.id,
-              release_date: connection.data.release_date.slice(0, 4),
-            };
+
+            return mediaType == "movie"
+              ? {
+                  id: movie.id,
+                  release_date: connection.data.release_date.slice(0, 4),
+                }
+              : {
+                  id: movie.id,
+                  release_date: connection.data.first_air_date.slice(0, 4),
+                };
           })
         );
 
@@ -104,7 +124,7 @@ const SimilarTitle = ({ id }: similarTitleProps) => {
           acc[cur.id] = cur.release_date;
           return acc;
         }, {});
-        
+
         setDateRelease(grouped);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
@@ -112,7 +132,7 @@ const SimilarTitle = ({ id }: similarTitleProps) => {
     }
 
     getMovieReleaseDate();
-  }, [similarTitle]);
+  }, [similarTitle, mediaType]);
 
   return (
     <Container>

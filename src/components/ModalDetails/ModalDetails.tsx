@@ -244,7 +244,7 @@ const ModalDetails = () => {
         <div>
           <h2>Títulos semelhantes</h2>
           <div>
-            <SimilarTitle id={id} />
+            <SimilarTitle id={id} mediaType={mediaType}/>
           </div>
         </div>
       </ModalContent>
