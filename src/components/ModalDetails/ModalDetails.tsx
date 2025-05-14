@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   CloseButton,
   ModalContent,
@@ -69,6 +69,7 @@ const ModalDetails = () => {
   const [crew, setCrew] = useState<string[]>([]);
   const [genres, setGenres] = useState<string[]>([]);
   const [mediaType, setMediaType] = useState<string | undefined>("");
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function getMediaType() {
@@ -152,6 +153,10 @@ const ModalDetails = () => {
         } else {
           setDateRelease(connection.data.first_air_date);
         }
+        
+        setTimeout(() => {
+          modalRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+        }, 0);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       }
@@ -201,7 +206,7 @@ const ModalDetails = () => {
 
   return (
     <ModalOverlay onClick={() => navigate(path)}>
-      <ModalContent onClick={(e) => e.stopPropagation()}>
+      <ModalContent ref={modalRef} onClick={(e) => e.stopPropagation()}>
         <CloseButton onClick={() => navigate(path)}>
           <CloseIcon />
         </CloseButton>
@@ -244,7 +249,7 @@ const ModalDetails = () => {
         <div>
           <h2>Títulos semelhantes</h2>
           <div>
-            <SimilarTitle id={id} mediaType={mediaType}/>
+            <SimilarTitle id={id} mediaType={mediaType} />
           </div>
         </div>
       </ModalContent>

@@ -6,12 +6,17 @@ import {
   StyledLink,
 } from "./NavbarleftSectionStyle";
 import image from "../../../assets/popcorn.webp";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CommonContext } from "../../../context/Common/CommonContext";
-import { handleSession } from "../../../utils/utils"
+import { handleSession } from "../../../utils/utils";
 
 const NavbarleftSection = () => {
   const { navSelect, setNavSelect } = useContext(CommonContext);
+
+  useEffect(() => {
+    const session = sessionStorage.getItem("n");
+    setNavSelect(session || "");
+  }, []);
 
   return (
     <LeftSection>

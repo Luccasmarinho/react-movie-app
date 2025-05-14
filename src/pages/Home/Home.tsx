@@ -7,7 +7,7 @@ const Home = () => {
   useEffect(() => {
     function createSession() {
       sessionStorage.setItem("n", "home");
-      sessionStorage.setItem("s", "/");
+      sessionStorage.setItem("p", "/");
     }
     createSession();
   }, []);

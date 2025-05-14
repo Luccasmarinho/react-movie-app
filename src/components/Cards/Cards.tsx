@@ -18,7 +18,7 @@ const Cards = ({ id, poster_path, title, name, vote_average }: CardsProps) => {
     >
       <AreaCard
         key={id}
-        onClick={() => handleSession("s", location.pathname, setPath)}
+        onClick={() => handleSession("p", location.pathname, setPath)}
       >
         {loading ? (
           <SkeletonCards />
