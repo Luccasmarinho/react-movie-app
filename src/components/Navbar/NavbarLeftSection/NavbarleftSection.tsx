@@ -16,7 +16,7 @@ const NavbarleftSection = () => {
   useEffect(() => {
     const session = sessionStorage.getItem("n");
     setNavSelect(session || "");
-  }, []);
+  }, [navSelect]);
 
   return (
     <LeftSection>
