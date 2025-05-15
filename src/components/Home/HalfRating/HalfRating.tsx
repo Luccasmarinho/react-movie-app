@@ -7,7 +7,7 @@ export default function HalfRating({ vote }: VoteProps) {
     <Stack spacing={1}>
       <Rating
         name="half-rating-read"
-        defaultValue={vote}
+        value={vote}
         precision={0.5}
         readOnly
         sx={{

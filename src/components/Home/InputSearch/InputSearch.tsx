@@ -16,21 +16,19 @@ const InputSearch = () => {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    navigate("/search");
+    navigate(`/search?q=${valueInputSearch}`);
   }
 
   return (
     <StyledWrapper>
-      <form
-        className="form"
-        onSubmit={handleSubmit}
-      >
+      <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="search">
           <input
             className="input"
             type="text"
             placeholder="Filmes, séries"
             id="search"
+            required
             value={valueInputSearch}
             onChange={handleChange}
           />
@@ -49,11 +47,11 @@ const InputSearch = () => {
           <AnimatePresence>
             {isClicked && (
               <StyledButton
-              key="cancel-button-unique"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.2 }}
+                key="cancel-button-unique"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.2 }}
                 type="button"
                 onClick={() => setIsClicked(false)}
               >

@@ -4,14 +4,15 @@ import Stack from "@mui/material/Stack";
 interface PaginationProps {
   OnChange: (event: React.ChangeEvent<unknown>, newValue: number) => void;
   page: number;
+  total_pages?: number
 }
 
-export default function BasicPagination({ OnChange, page }: PaginationProps) {
+export default function BasicPagination({ OnChange, page, total_pages }: PaginationProps) {
   return (
     <Stack spacing={2}>
       <Pagination
         page={page}
-        count={500}
+        count={!total_pages ? 500 : total_pages}
         color="standard"
         sx={{
           "& .MuiPaginationItem-root": {

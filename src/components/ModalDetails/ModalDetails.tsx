@@ -16,6 +16,7 @@ import { api } from "../../service/api";
 import { MovieTrailer, MoviesResponse } from "../../types/movies/movies";
 import AgeGroup from "../AgeGroup/AgeGroup";
 import SimilarTitle from "../SimilarTitle/SimilarTitle";
+import Loading from "../Home/Loading/Loading";
 
 interface ReleaseDates {
   certification: string;
@@ -61,7 +62,7 @@ const ModalDetails = () => {
   const { id, title } = useParams();
 
   const [keyTrailer, setKeyTrailer] = useState<string>("");
-  const { setLoading, path } = useContext(CommonContext);
+  const { loading, setLoading, path } = useContext(CommonContext);
   const [ageGroup, setAgeGroup] = useState<string | undefined>("");
   const [overviews, setOverViews] = useState<string>("");
   const [dateRelease, setDateRelease] = useState<string>("");
@@ -89,8 +90,8 @@ const ModalDetails = () => {
   }, [id]);
 
   useEffect(() => {
-    if (!mediaType) return;
     setLoading(true);
+    if (!mediaType) return;
     async function getKeyVideo(): Promise<void> {
       try {
         const connection = await api.get<MoviesResponse<MovieTrailer[]>>(
@@ -141,6 +142,7 @@ const ModalDetails = () => {
   }, [id, mediaType]);
 
   useEffect(() => {
+    setLoading(true);
     if (!mediaType) return;
     async function getMovieDetails(): Promise<void> {
       try {
@@ -153,10 +155,11 @@ const ModalDetails = () => {
         } else {
           setDateRelease(connection.data.first_air_date);
         }
-        
+
         setTimeout(() => {
           modalRef.current?.scrollTo({ top: 0, behavior: "smooth" });
         }, 0);
+        setLoading(false);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       }
@@ -170,6 +173,8 @@ const ModalDetails = () => {
   }, [id, mediaType]);
 
   useEffect(() => {
+    setLoading(true);
+
     if (!mediaType) return;
 
     async function getCredits(): Promise<void> {
@@ -183,6 +188,7 @@ const ModalDetails = () => {
 
         const crewArray = connection.data.crew.map((c) => c.name);
         setCrew(crewArray);
+        setLoading(false);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       }
@@ -210,48 +216,54 @@ const ModalDetails = () => {
         <CloseButton onClick={() => navigate(path)}>
           <CloseIcon />
         </CloseButton>
-        <div>
-          <h2>{title}</h2>
-        </div>
-        <div>
-          <VideoTrailer keyTrailer={keyTrailer} />
-        </div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            <div>
+              <h2>{title}</h2>
+            </div>
+            <div>
+              <VideoTrailer keyTrailer={keyTrailer} />
+            </div>
 
-        <ContainerOverview>
-          <Box>
-            <Age>
-              <p>{dateRelease.slice(0, 4)}</p>
-              <AgeGroup age={ageGroup} />
-            </Age>
-            <Overview>
-              <p>{overviews}</p>
-            </Overview>
-          </Box>
+            <ContainerOverview>
+              <Box>
+                <Age>
+                  <p>{dateRelease.slice(0, 4)}</p>
+                  <AgeGroup age={ageGroup} />
+                </Age>
+                <Overview>
+                  <p>{overviews}</p>
+                </Overview>
+              </Box>
 
-          <Box>
+              <Box>
+                <div>
+                  <p>
+                    <strong>Elenco: </strong> {cast.slice(0, 5).join(", ")}.
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <strong>Direção: </strong> {crew.slice(0, 5).join(", ")}.
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <strong>Gêneros</strong>: {genres.join(", ")}.
+                  </p>
+                </div>
+              </Box>
+            </ContainerOverview>
             <div>
-              <p>
-                <strong>Elenco: </strong> {cast.slice(0, 5).join(", ")}.
-              </p>
+              <h2>Títulos semelhantes</h2>
+              <div>
+                <SimilarTitle id={id} mediaType={mediaType} />
+              </div>
             </div>
-            <div>
-              <p>
-                <strong>Direção: </strong> {crew.slice(0, 5).join(", ")}.
-              </p>
-            </div>
-            <div>
-              <p>
-                <strong>Gêneros</strong>: {genres.join(", ")}.
-              </p>
-            </div>
-          </Box>
-        </ContainerOverview>
-        <div>
-          <h2>Títulos semelhantes</h2>
-          <div>
-            <SimilarTitle id={id} mediaType={mediaType} />
-          </div>
-        </div>
+          </>
+        )}
       </ModalContent>
     </ModalOverlay>
   );

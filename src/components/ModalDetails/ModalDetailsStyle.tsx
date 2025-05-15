@@ -23,6 +23,7 @@ export const ModalContent = styled.div`
   overflow-y: auto;
   color: white;
   position: relative;
+  min-height: 400px;
 
   h2 {
     margin-bottom: 10px;
@@ -51,7 +52,7 @@ export const ContainerOverview = styled.div`
   }
 
   strong {
-    color: #5A5A5A;
+    color: #5a5a5a;
   }
 `;
 

@@ -8,9 +8,10 @@ interface ContainerCardsProps {
     movieList: MoviePopular[];
     Onchange: (event: React.ChangeEvent<unknown>, newValue: number) => void
     page: number;
+    total_pages?: number;
 }
 
-const ContainerCards = ({ title, movieList, Onchange, page }: ContainerCardsProps) => {
+const ContainerCards = ({ title, movieList, Onchange, page, total_pages }: ContainerCardsProps) => {
   return (
     <Container>
     <AreaTitle>
@@ -31,7 +32,7 @@ const ContainerCards = ({ title, movieList, Onchange, page }: ContainerCardsProp
       </AreaCard>
     </Box>
     <AreaPagination>
-      <BasicPagination OnChange={Onchange} page={Number(page)} />
+      <BasicPagination OnChange={Onchange} page={Number(page)} total_pages={total_pages}/>
     </AreaPagination>
   </Container>
   )

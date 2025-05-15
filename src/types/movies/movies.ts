@@ -26,6 +26,7 @@ export interface MovieTrailer {
 
 export interface MoviesResponse<T> {
     results: T
+    total_pages?: number;
 }
 
 export interface MoviesProps {

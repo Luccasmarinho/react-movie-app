@@ -1,13 +1,4 @@
 import { useContext, useEffect } from "react";
-// import Cards from "../Cards/Cards";
-// import BasicPagination from "../BasicPagination/BasicPagination";
-// import {
-//   Container,
-//   AreaTitle,
-//   Box,
-//   AreaCard,
-//   AreaPagination,
-// } from "./SectionAllCardsStyle";
 import { api } from "../../service/api";
 import {
   MoviePopular as AllMoviesResults,
@@ -17,6 +8,7 @@ import {
 import { CommonContext } from "../../context/Common/CommonContext";
 import { useSearchParams } from "react-router-dom";
 import ContainerCards from "../ContainerCards/ContainerCards";
+import Loading from "../Home/Loading/Loading";
 
 const SectionAllCards = ({
   title,
@@ -24,7 +16,7 @@ const SectionAllCards = ({
   movieList,
   paramsMovie,
 }: SectionCardsProps) => {
-  const { setLoading } = useContext(CommonContext);
+  const { setLoading, loading } = useContext(CommonContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || 1;
 
@@ -52,35 +44,17 @@ const SectionAllCards = ({
 
   return (
     <>
-      <ContainerCards
-        title={title}
-        movieList={movieList}
-        Onchange={handleChange}
-        page={Number(page)}
-      />
+      {loading ? (
+        <Loading />
+      ) : (
+        <ContainerCards
+          title={title}
+          movieList={movieList}
+          Onchange={handleChange}
+          page={Number(page)}
+        />
+      )}
     </>
-    // <Container>
-    //   <AreaTitle>
-    //     <h1>{title}</h1>
-    //   </AreaTitle>
-    //   <Box>
-    //     <AreaCard>
-    //       {movieList.map((movie) => (
-    //         <Cards
-    //           key={movie.id}
-    //           id={movie.id}
-    //           poster_path={movie.poster_path}
-    //           vote_average={movie.vote_average / 2}
-    //           title={movie.title}
-    //           name={movie.name}
-    //         />
-    //       ))}
-    //     </AreaCard>
-    //   </Box>
-    //   <AreaPagination>
-    //     <BasicPagination OnChange={handleChange} page={Number(page)} />
-    //   </AreaPagination>
-    // </Container>
   );
 };
 
