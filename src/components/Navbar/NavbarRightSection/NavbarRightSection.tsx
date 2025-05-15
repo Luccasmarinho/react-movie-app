@@ -19,7 +19,7 @@ const NavbarRightSection = () => {
   const { isClicked, setIsClicked } = useContext(CommonContext);
   return (
     <RightSection>
-      <AnimatePresence>
+      <AnimatePresence mode="popLayout">
         <StyledButtonSearch
           onClick={() => setIsClicked(true)}
           isClicked={isClicked}
@@ -28,6 +28,7 @@ const NavbarRightSection = () => {
         </StyledButtonSearch>
         {isClicked && (
           <StyledInputSearch
+            key="input-search-unique"
             initial={{ opacity: 0, x: 150 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 50 }}

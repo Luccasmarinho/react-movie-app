@@ -3,6 +3,7 @@ import Home from "../pages/Home/Home";
 import Movies from "../pages/Movies/Movies";
 import Series from "../pages/Series/Series";
 import Details from "../pages/Details/Details";
+import Search from "../pages/Search/Search";
 
 const RoutesApp = () => {
   const location = useLocation();
@@ -14,6 +15,7 @@ const RoutesApp = () => {
         <Route path="/filmes" element={<Movies />} />
         <Route path="/series" element={<Series />} />
         <Route path="/details/:id/:title" element={<Details />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/*" element={<p>not found</p>} />
       </Routes>
 

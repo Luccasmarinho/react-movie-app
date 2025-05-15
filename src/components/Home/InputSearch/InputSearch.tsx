@@ -1,21 +1,38 @@
-// import React from 'react';
 import { useContext } from "react";
 import { StyledWrapper, StyledButton } from "./InputSearchStyle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { AnimatePresence } from "framer-motion";
 import { CommonContext } from "../../../context/Common/CommonContext";
+import { useNavigate } from "react-router-dom";
 
 const InputSearch = () => {
-  const { isClicked, setIsClicked } = useContext(CommonContext);
+  const navigate = useNavigate();
+  const { isClicked, setIsClicked, valueInputSearch, setValueInputSearch } =
+    useContext(CommonContext);
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setValueInputSearch(e.target.value);
+  }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    navigate("/search");
+  }
+
   return (
     <StyledWrapper>
-      <form className="form">
+      <form
+        className="form"
+        onSubmit={handleSubmit}
+      >
         <label htmlFor="search">
           <input
             className="input"
             type="text"
             placeholder="Filmes, séries"
             id="search"
+            value={valueInputSearch}
+            onChange={handleChange}
           />
           <div className="fancy-bg" />
           <div className="search">
@@ -32,13 +49,11 @@ const InputSearch = () => {
           <AnimatePresence>
             {isClicked && (
               <StyledButton
-                initial={{ opacity: 0, height: 0, y: -60 }}
-                animate={{ opacity: 1, height: "auto", y: 0 }}
-                exit={{ opacity: 0, height: 0, y: -60 }}
-                transition={{
-                  duration: 0.3,
-                  ease: "easeOut",
-                }}
+              key="cancel-button-unique"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.2 }}
                 type="button"
                 onClick={() => setIsClicked(false)}
               >

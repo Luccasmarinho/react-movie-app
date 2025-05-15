@@ -9,6 +9,7 @@ const ProviderCommon = ({ children }: PropsChildren) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [scrollMove, setScrollMove] = useState<boolean>(false);
+  const [valueInputSearch, setValueInputSearch] = useState<string>("")
   const [path, setPath] = useState<string>((): string => {
     return sessionStorage.getItem("s") || "/"
   });
@@ -23,7 +24,9 @@ const ProviderCommon = ({ children }: PropsChildren) => {
     scrollMove,
     setScrollMove,
     path,
-    setPath
+    setPath,
+    valueInputSearch,
+    setValueInputSearch
   };
 
   return (

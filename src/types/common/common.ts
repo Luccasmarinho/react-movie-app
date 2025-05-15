@@ -31,6 +31,8 @@ export interface CommonContextType {
     setScrollMove: React.Dispatch<React.SetStateAction<boolean>>;
     path: string;
     setPath: React.Dispatch<React.SetStateAction<string>>;
+    valueInputSearch: string;
+    setValueInputSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface CardsProps {
