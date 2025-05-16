@@ -1,11 +1,6 @@
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-
-interface PaginationProps {
-  OnChange: (event: React.ChangeEvent<unknown>, newValue: number) => void;
-  page: number;
-  total_pages?: number
-}
+import {PaginationProps} from "../../types/common/common"
 
 export default function BasicPagination({ OnChange, page, total_pages }: PaginationProps) {
   return (

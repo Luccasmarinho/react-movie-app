@@ -1,15 +1,7 @@
 import BasicPagination from "../BasicPagination/BasicPagination"
 import Cards from "../Cards/Cards"
 import { Container, AreaTitle, Box, AreaCard, AreaPagination } from "./ContainerCardsStyle";
-import {MoviePopular} from "../../types/movies/movies"
-
-interface ContainerCardsProps {
-    title: string;
-    movieList: MoviePopular[];
-    Onchange: (event: React.ChangeEvent<unknown>, newValue: number) => void
-    page: number;
-    total_pages?: number;
-}
+import {ContainerCardsProps} from "../../types/movies/movies";
 
 const ContainerCards = ({ title, movieList, Onchange, page, total_pages }: ContainerCardsProps) => {
   return (

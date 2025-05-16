@@ -13,49 +13,17 @@ import CloseIcon from "@mui/icons-material/Close";
 import VideoTrailer from "../VideoTrailer/VideoTrailer";
 import { CommonContext } from "../../context/Common/CommonContext";
 import { api } from "../../service/api";
-import { MovieTrailer, MoviesResponse } from "../../types/movies/movies";
+import {
+  MovieTrailer,
+  MoviesResponse,
+  MovieRelaseDates,
+  MoviesDetails,
+  CreditsMovie,
+  MediaType
+} from "../../types/movies/movies";
 import AgeGroup from "../AgeGroup/AgeGroup";
 import SimilarTitle from "../SimilarTitle/SimilarTitle";
 import Loading from "../Home/Loading/Loading";
-
-interface ReleaseDates {
-  certification: string;
-}
-
-interface MovieRelaseDates {
-  iso_3166_1: string;
-  release_dates: ReleaseDates[];
-  rating: string;
-}
-
-// interface MoviesDetailsData {
-//   data: MoviesDetails;
-// }
-
-interface MoviesDetails {
-  overview: string;
-  release_date: string;
-  genres: GenresMovies[];
-  first_air_date: string;
-}
-
-interface GenresMovies {
-  name: string;
-}
-
-interface CreditsMovie {
-  cast: CreditsMovie[];
-  crew: CreditsMovie[];
-}
-
-interface CreditsMovie {
-  name: string;
-}
-
-interface MediaType {
-  id: number;
-  media_type: string;
-}
 
 const ModalDetails = () => {
   const navigate = useNavigate();

@@ -53,3 +53,61 @@ export interface MovieContextType {
     AllMovies: MoviePopular[];
     setAllMovies: React.Dispatch<React.SetStateAction<MoviePopular[]>>; 
 }
+
+export interface MovieAgeGroupsProps extends MovieTopRated {
+    age: string | undefined;
+    date_release: string;
+}
+
+export interface ContainerCardsProps {
+    title: string;
+    movieList: MoviePopular[];
+    Onchange: (event: React.ChangeEvent<unknown>, newValue: number) => void
+    page: number;
+    total_pages?: number;
+}
+
+export interface ReleaseDates {
+    certification: string;
+  }
+  
+  export interface MovieRelaseDates {
+    iso_3166_1: string;
+    release_dates: ReleaseDates[];
+    rating: string;
+  }
+  
+  export interface MoviesDetails {
+    overview: string;
+    release_date: string;
+    genres: GenresMovies[];
+    first_air_date: string;
+  }
+  
+  export interface GenresMovies {
+    name: string;
+  }
+  
+  export interface CreditsMovie {
+    cast: CreditsMovieName[];
+    crew: CreditsMovieName[];
+  }
+  
+  export interface CreditsMovieName {
+    name: string;
+  }
+  
+  export interface MediaType {
+    id: number;
+    media_type: string;
+}
+
+export interface similarTitleProps {
+    id: string | undefined;
+    mediaType: string | undefined;
+}
+
+export interface MoviesDetailsSimilar {
+    release_date: string;
+    first_air_date: string;
+}

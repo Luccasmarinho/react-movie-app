@@ -1,31 +1,14 @@
 import {
   MoviesResponse,
   MovieTopRated as SimilarTitleType,
+  similarTitleProps,
+  MovieRelaseDates,
+  MoviesDetailsSimilar
 } from "../../types/movies/movies";
 import { useEffect, useState } from "react";
 import { api } from "../../service/api";
 import CardSimilarTitle from "../CardSimilarTitle/CardSimilarTitle";
 import { Container } from "./SimilarTitleStyle.tsx";
-
-interface similarTitleProps {
-  id: string | undefined;
-  mediaType: string | undefined;
-}
-
-interface ReleaseDates {
-  certification: string;
-}
-
-interface MovieRelaseDates {
-  iso_3166_1: string;
-  release_dates: ReleaseDates[];
-  rating: string;
-}
-
-interface MoviesDetails {
-  release_date: string;
-  first_air_date: string;
-}
 
 const SimilarTitle = ({ id, mediaType }: similarTitleProps) => {
   const [similarTitle, SetSimilarTitle] = useState<SimilarTitleType[]>([]);
@@ -104,7 +87,7 @@ const SimilarTitle = ({ id, mediaType }: similarTitleProps) => {
       try {
         const results = await Promise.all(
           similarTitle.map(async (movie) => {
-            const connection = await api.get<MoviesDetails>(
+            const connection = await api.get<MoviesDetailsSimilar>(
               `/${mediaType}/${movie.id}`
             );
 

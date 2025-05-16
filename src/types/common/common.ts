@@ -50,3 +50,9 @@ export interface VideoTrailerProps {
 export interface MovieAgeGroupsProps {
     age: string | undefined;
 }
+
+export interface PaginationProps {
+    OnChange: (event: React.ChangeEvent<unknown>, newValue: number) => void;
+    page: number;
+    total_pages?: number
+}

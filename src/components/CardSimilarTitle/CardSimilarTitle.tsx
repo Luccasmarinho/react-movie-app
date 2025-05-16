@@ -5,13 +5,8 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import AgeGroup from "../AgeGroup/AgeGroup";
 import imageNotAvailable from "../../assets/No_Image_Available.jpg";
-import { MovieTopRated as SimilarTitleType } from "../../types/movies/movies";
+import { MovieAgeGroupsProps } from "../../types/movies/movies";
 import { Link, useLocation } from "react-router-dom";
-
-interface MovieAgeGroupsProps extends SimilarTitleType {
-  age: string | undefined;
-  date_release: string;
-}
 
 export default function CardSimilarTitle({
   backdrop_path,
