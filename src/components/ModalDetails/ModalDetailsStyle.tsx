@@ -24,10 +24,6 @@ export const ModalContent = styled.div`
   color: white;
   position: relative;
   min-height: 400px;
-
-  h2 {
-    margin-bottom: 10px;
-  }
 `;
 
 export const CloseButton = styled.button`
@@ -41,6 +37,12 @@ export const CloseButton = styled.button`
   cursor: pointer;
 `;
 
+export const AreaTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+`;
 export const ContainerOverview = styled.div`
   display: flex;
   margin-bottom: 20px;

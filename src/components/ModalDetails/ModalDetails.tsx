@@ -8,6 +8,7 @@ import {
   Box,
   Age,
   Overview,
+  AreaTitle,
 } from "./ModalDetailsStyle";
 import CloseIcon from "@mui/icons-material/Close";
 import VideoTrailer from "../VideoTrailer/VideoTrailer";
@@ -19,11 +20,12 @@ import {
   MovieRelaseDates,
   MoviesDetails,
   CreditsMovie,
-  MediaType
+  MediaType,
 } from "../../types/movies/movies";
 import AgeGroup from "../AgeGroup/AgeGroup";
 import SimilarTitle from "../SimilarTitle/SimilarTitle";
 import Loading from "../Home/Loading/Loading";
+import AddToFavButton from "../AddToFavButton/AddToFavButton";
 
 const ModalDetails = () => {
   const navigate = useNavigate();
@@ -38,6 +40,8 @@ const ModalDetails = () => {
   const [crew, setCrew] = useState<string[]>([]);
   const [genres, setGenres] = useState<string[]>([]);
   const [mediaType, setMediaType] = useState<string | undefined>("");
+  const [posterPath, setPosterPath] = useState<string>("");
+  const [voteAverage, setVoteAverage] = useState<number>();
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -115,6 +119,8 @@ const ModalDetails = () => {
     async function getMovieDetails(): Promise<void> {
       try {
         const connection = await api.get<MoviesDetails>(`/${mediaType}/${id}`);
+        setPosterPath(connection.data.poster_path);
+        setVoteAverage(connection.data.vote_average);
         const genresArray = connection.data.genres.map((g) => g.name);
         setGenres(genresArray);
         setOverViews(connection.data.overview);
@@ -184,13 +190,20 @@ const ModalDetails = () => {
         <CloseButton onClick={() => navigate(path)}>
           <CloseIcon />
         </CloseButton>
-        {loading ? (
+        {!mediaType || loading ? (
           <Loading />
         ) : (
           <>
-            <div>
+            <AreaTitle>
               <h2>{title}</h2>
-            </div>
+              <AddToFavButton
+                id={Number(id)}
+                name={title}
+                title={title}
+                poster_path={posterPath}
+                vote_average={(voteAverage ?? 0) / 2}
+              />
+            </AreaTitle>
             <div>
               <VideoTrailer keyTrailer={keyTrailer} />
             </div>

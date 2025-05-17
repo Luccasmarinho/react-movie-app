@@ -82,6 +82,8 @@ export interface ReleaseDates {
     release_date: string;
     genres: GenresMovies[];
     first_air_date: string;
+    poster_path: string;
+    vote_average: number;
   }
   
   export interface GenresMovies {
