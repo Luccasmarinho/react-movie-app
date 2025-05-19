@@ -11,18 +11,19 @@ const AddToFavButton = ({
   name,
   title,
 }: CardsProps) => {
-//   const [btnAddFavIsClicked, setBtnAddFavIsClicked] = useState<boolean>(() => {
-//     const localData = localStorage.getItem("fav");
-//     const localArray = localData ? JSON.parse(localData) : [];
-//     const findId = localArray.find((e: CardsProps) => e.id === id);
-//     return findId ? true : false;
-//   });
-
-const [btnAddFavIsClicked, setBtnAddFavIsClicked] = useState<boolean>(false);
-
+  const [btnAddFavIsClicked, setBtnAddFavIsClicked] = useState<boolean>(false);
+  const localData = localStorage.getItem("fav");
+  const localArray = localData ? JSON.parse(localData) : [];
   useEffect(() => {
-    const localData = localStorage.getItem("fav");
-    const localArray = localData ? JSON.parse(localData) : [];
+    if (!localData) {
+      localStorage.setItem("fav", JSON.stringify([]));
+    } else {
+      const findId = localArray.find((e: CardsProps) => e.id === id);
+      findId ? setBtnAddFavIsClicked(true) : setBtnAddFavIsClicked(false);
+    }
+  }, [btnAddFavIsClicked]);
+
+  function handleClick() {
     const objCard = {
       id,
       title,
@@ -31,42 +32,16 @@ const [btnAddFavIsClicked, setBtnAddFavIsClicked] = useState<boolean>(false);
       vote_average,
     };
 
-    if (!localData) {
-      localStorage.setItem("fav", JSON.stringify([]));
-    }
-
-    if (btnAddFavIsClicked) {
+    if (!btnAddFavIsClicked) {
       localStorage.setItem("fav", JSON.stringify([...localArray, objCard]));
+      setBtnAddFavIsClicked(true);
     } else {
       const filterLocalRemove = localArray.filter(
         (e: CardsProps) => e.id !== id
       );
       localStorage.setItem("fav", JSON.stringify(filterLocalRemove));
+      setBtnAddFavIsClicked(false);
     }
-  }, [btnAddFavIsClicked]);
-
-  function handleClick() {
-    setBtnAddFavIsClicked((prev) => !prev);
-    // const objCard = {
-    //   id,
-    //   title,
-    //   name,
-    //   poster_path,
-    //   vote_average,
-    // };
-
-    // if (btnAddFavIsClicked) {
-    //   const localData = localStorage.getItem("fav");
-    //   const localArray = localData ? JSON.parse(localData) : [];
-    //   localStorage.setItem("fav", JSON.stringify([...localArray, objCard]));
-    // } else {
-    //   const localData = localStorage.getItem("fav");
-    //   const localArray = localData ? JSON.parse(localData) : [];
-    //   const filterLocalRemove = localArray.filter(
-    //     (e: CardsProps) => e.id !== id
-    //   );
-    //   localStorage.setItem("fav", JSON.stringify(filterLocalRemove));
-    // }
   }
 
   return (

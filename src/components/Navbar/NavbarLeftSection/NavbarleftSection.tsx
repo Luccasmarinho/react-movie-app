@@ -58,13 +58,15 @@ const NavbarleftSection = () => {
             </StyledLi>
           </StyledLink>
 
-          <StyledLi
-            navSelect={navSelect}
-            id="favoritos"
-            onClick={() => handleSession("n", "favoritos", setNavSelect)}
-          >
-            Favoritos
-          </StyledLi>
+          <StyledLink to={"/favorites"}>
+            <StyledLi
+              navSelect={navSelect}
+              id="favoritos"
+              onClick={() => handleSession("n", "favoritos", setNavSelect)}
+            >
+              Favoritos
+            </StyledLi>
+          </StyledLink>
         </ul>
       </ListNavegation>
     </LeftSection>
