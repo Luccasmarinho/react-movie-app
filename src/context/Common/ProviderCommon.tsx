@@ -13,6 +13,8 @@ const ProviderCommon = ({ children }: PropsChildren) => {
   const [path, setPath] = useState<string>((): string => {
     return sessionStorage.getItem("s") || "/"
   });
+  const [btnAddFavIsClicked, setBtnAddFavIsClicked] = useState<boolean>(false);
+
 
   const values = {
     navSelect,
@@ -26,7 +28,9 @@ const ProviderCommon = ({ children }: PropsChildren) => {
     path,
     setPath,
     valueInputSearch,
-    setValueInputSearch
+    setValueInputSearch,
+    btnAddFavIsClicked,
+    setBtnAddFavIsClicked
   };
 
   return (

@@ -33,6 +33,8 @@ export interface CommonContextType {
     setPath: React.Dispatch<React.SetStateAction<string>>;
     valueInputSearch: string;
     setValueInputSearch: React.Dispatch<React.SetStateAction<string>>;
+    btnAddFavIsClicked: boolean;
+    setBtnAddFavIsClicked: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface CardsProps {

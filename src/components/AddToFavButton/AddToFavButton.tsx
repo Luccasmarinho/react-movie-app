@@ -1,9 +1,10 @@
 import AddIcon from "@mui/icons-material/Add";
 import DoneIcon from "@mui/icons-material/Done";
 import { Button } from "./AddToFavButtonStyle";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { CardsProps } from "../../types/common/common";
 import { toast } from "react-toastify";
+import { CommonContext } from "../../context/Common/CommonContext";
 
 const AddToFavButton = ({
   id,
@@ -12,7 +13,7 @@ const AddToFavButton = ({
   name,
   title,
 }: CardsProps) => {
-  const [btnAddFavIsClicked, setBtnAddFavIsClicked] = useState<boolean>(false);
+  const { btnAddFavIsClicked, setBtnAddFavIsClicked } = useContext(CommonContext);
   const localData = localStorage.getItem("fav");
   const localArray = localData ? JSON.parse(localData) : [];
   useEffect(() => {
