@@ -3,6 +3,7 @@ import DoneIcon from "@mui/icons-material/Done";
 import { Button } from "./AddToFavButtonStyle";
 import { useEffect, useState } from "react";
 import { CardsProps } from "../../types/common/common";
+import { toast } from "react-toastify";
 
 const AddToFavButton = ({
   id,
@@ -35,12 +36,14 @@ const AddToFavButton = ({
     if (!btnAddFavIsClicked) {
       localStorage.setItem("fav", JSON.stringify([...localArray, objCard]));
       setBtnAddFavIsClicked(true);
+      toast.success(`${title} foi adicionado à sua lista de favoritos.`);
     } else {
       const filterLocalRemove = localArray.filter(
         (e: CardsProps) => e.id !== id
       );
       localStorage.setItem("fav", JSON.stringify(filterLocalRemove));
       setBtnAddFavIsClicked(false);
+      toast.info(`${title} foi removido da sua lista de favoritos.`);
     }
   }
 
