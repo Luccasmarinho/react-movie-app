@@ -45,21 +45,3 @@ npm install
 npm run dev
 ```
 
-## 🤝 Contribuição
-
-Quer contribuir com o projeto? Siga este exemplo:
-
-1. **Fork** o repositório.  
-2. Crie uma branch para sua feature ou correção:  
-```bash
-git checkout -b minha-feature
-```
-3. Faça um commit:
-```bash
-git commit -m "Minha feature"
-```
-4. Push:
-```bash
-git push origin minha-feature
-```
-5. Abra um Pull Request
